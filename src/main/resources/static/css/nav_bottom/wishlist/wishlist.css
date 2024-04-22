@@ -1,0 +1,152 @@
+html,body {
+    margin: 0;
+    padding: 0;
+}
+
+#view_layout{
+/*    min-height: 100vh; */
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    background: transparent;
+}
+
+.table2_view{
+    margin:75px;
+    max-width: 80%;
+    display: flex;
+    flex-direction: row;
+    align-self:center;
+    background: rgb(212, 212, 183);
+    box-shadow: 0 4px 8px 0 rgba(43, 44, 43, 0.514);
+    z-index: 2;
+    overflow: scroll;
+}
+
+.table2_view:hover{
+    box-shadow: 0 8px 16px 0 rgba(22, 80, 187, 0.459);
+}
+
+
+.table2_row{
+    min-height: 50px;
+    max-height: 50px;
+    display: flex;
+    flex-direction: row;
+    background: transparent;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgb(65, 63, 63);
+}
+
+.table2_row:hover{
+    border-left: 3px solid rgb(215, 238, 8);
+    border-right: 3px solid rgb(252, 9, 82);
+}
+
+
+.table2_column{
+    min-width: 150px;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+}
+
+
+.table2_column .table2_row:nth-child(odd){
+background: #1a1a1a;
+background: #070c25;
+}
+
+.table2_column:nth-child(odd) .table2_row:hover{
+    background: transparent;
+}
+
+.table2_column .table2_row:nth-child(even){
+background: #212227;
+background: #03061b;
+}
+
+.table2_column:nth-child(even) .table2_row:hover{
+    background: transparent;
+}
+
+.table2_row:nth-child(1){
+   border-bottom: 1px solid #34353bbd;
+}
+
+.table2_row:nth-child(1) span{
+    color: rgb(37, 201, 5);
+    font-size: 700;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    font-stretch: extra-expanded;
+    font-style: italic;
+}
+
+.table2_row:nth-of-type(n+2) span{
+    color: rgb(107, 102, 102);
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.forms button{
+min-width:40px;
+min-height: 24px;
+color: red;
+background: #000000;
+border: none;
+outline: none;
+}
+
+.payment_section{
+display: flex;
+flex-grow: 1;
+flex-direction: row;
+overflow: hidden;
+}
+
+.payment_header{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+}
+
+.payment_form{
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.payment_form button{
+max-height: 36px;
+min-width: 150px;
+background: #070c25;
+color: wheat;
+border: none;
+outline: none;
+}
+
+.payment_footer{
+    display: flex;
+    flex-grow: 2;
+    flex-direction: row;
+    justify-content: flex-start;
+    visibility: collapse;
+}
+
+.payment_footer span{
+    color: white;
+    font-size: 21px;
+}
+
+.payment_footer span::before{
+content: 'Link : ';
+}
+
+@media screen and (max-width: 712px) {
+    .payment_section{
+        flex-direction: column;
+    }
+}

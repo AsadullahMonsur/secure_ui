@@ -1,0 +1,143 @@
+html,body{
+    margin: 0;
+    padding: 0;
+}
+
+#profile_card{
+/*    min-height: 100vh; */
+    display: flex;
+    flex-direction: row;
+    flex-grow:1;
+    background: #262726;
+}
+
+.row{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background: rgba(107, 107, 121, 0.349);
+
+}
+
+.column{
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    color: wheat;
+    background: rgba(18, 18, 19, 0.541);
+    transition: .75s;
+}
+
+.column:hover{
+    filter: drop-shadow(rgb(19, 17, 17) 5px 5px 5px);
+    z-index: 3;
+    color: white;
+}
+.item_hint{
+margin: 15px;
+align-self: center;
+text-align: center;
+justify-self: center;
+}
+
+.forms{
+display: flex;
+flex-direction: row;
+align-items: center;
+flex-grow:1;
+}
+
+#reset_pass_id{
+display: flex;
+flex-grow: 2;
+}
+
+.forms button{
+margin: 10px;    
+max-width: 100px;
+min-height: 40px;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-grow: 1;
+background: rgba(61, 61, 61, 0.082);
+color: rgba(255, 240, 240, 0.575);
+font-size: large;
+border-radius: 5px;
+filter: drop-shadow(black 1px 1px 2px);
+order: 3;
+}
+
+.forms button:hover{
+    background: black;
+    color: white;
+}
+
+.inputsfp{
+    margin: 10px;
+    max-width: 200px;
+    min-height: 36px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    color: wheat;
+    font-size: 18px;
+    outline: none;
+    padding-left: 10px;
+    border: none;
+    border-bottom: 1px solid wheat;
+    border-radius: 0px;
+    transition: .75s;;
+    background: transparent;
+    order: 1;
+}
+
+.inputsfp:focus{
+max-width: 450px;
+outline: none;
+}
+
+.passwordfp:not(:focus):not(:placeholder-shown):invalid{
+    border:1px solid rgb(0, 0, 0);
+    border-radius: 5px;
+    color:  rgb(165, 1, 1);
+}
+
+.passwordfp:not(:focus):valid{
+    border:1px solid rgb(28, 241, 8);
+    border-radius: 5px;
+    color:rgb(28, 241, 8);
+}
+
+.passwordfp:focus:valid{
+    box-shadow: 0 0 7px rgb(28, 241, 8);
+    border:1px solid rgb(28, 241, 8);
+    border-radius: 5px;
+    color: rgb(28, 241, 8);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.passwordfp:focus:invalid{
+    box-shadow: 0 0 7px  rgb(165, 1, 1);
+    border:1px solid rgb(165, 1, 1);
+    border-radius: 5px;
+    color:  rgb(165, 1, 1);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+@media screen and (max-width: 712px) {
+
+    .row{
+       flex-direction: column; 
+    }
+
+    .column{
+        flex-direction: column;
+    }
+    
+    .forms{
+        flex-direction: column;
+    }
+}

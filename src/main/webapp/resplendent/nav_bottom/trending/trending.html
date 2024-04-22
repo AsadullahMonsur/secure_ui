@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="fragment_trending">
+<head>
+    <meta charset="UTF-8"
+          name="viewport"
+          content="width=device-width, initial-scale=1,  minimum-scale=1,maximum-scale=3, user-scalable=yes"/>
+    <title>Secure UI</title>
+
+
+    <link rel="stylesheet"
+          href="../static/css/nav_bottom/trending/trending.css"
+          th:href="@{/css/nav_bottom/trending/trending.css}"/>
+
+</head>
+<body>
+
+<div id="view_layout">
+
+     <div id="preface" th:style="'background:url('+ @{/image/nav_bar/trending/dark_forest.jpg} + ');background-size: cover;'">
+
+            <div id="wt_container">
+         
+              <span id="wt_part_01" class="wt">c</span>
+              <span id="wt_part_02" class="wt">l</span>
+              <span id="wt_part_03" class="wt">o</span>
+              <span id="wt_part_04" class="wt">g</span>
+              <span id="wt_part_05" class="wt">h</span>
+              <span id="wt_part_06" class="wt">t</span>
+            
+            
+              <span id="spark_part_01" class="spark left_sparklet"></span>
+              <span id="spark_part_02" class="spark left_sparklet"></span>
+              <span id="spark_part_03" class="spark left_sparklet"></span>
+              <span id="spark_part_04" class="spark left_sparklet"></span>
+              <span id="spark_part_05" class="spark left_sparklet"></span>
+              <span id="spark_part_06" class="spark left_sparklet"></span>
+
+              <span id="spark_part_07" class="spark right_sparklet"></span>
+              <span id="spark_part_08" class="spark right_sparklet"></span>
+              <span id="spark_part_09" class="spark right_sparklet"></span>
+              <span id="spark_part_10" class="spark right_sparklet"></span>
+              <span id="spark_part_11" class="spark right_sparklet"></span>
+              <span id="spark_part_12" class="spark right_sparklet"></span>
+      
+            </div>
+
+
+            <div id="motivation_container">
+
+                  <p id="motivation_greetings"> Peace befalls upon you, with Mercy and Blessings of Allah  </p>
+
+                  <p id="motivation_content"> O children of adam, I Alone(Allah) have bestowed upon you clothing to conceal your private parts and as adornment. but
+                      
+                      <span>the clothing of righteousness</span>  - that is best. that is from the signs of Allah that perhaps they will remember. 
+            
+                  </p>
+            
+                  <p id="motivation_source"> [7:26]---[chapter the heights/surah aa'r-af` from Al-Qur'an] </p>
+            
+                  <p id="motivation_content_owner">Qur'an the guidance from 'Allah-The Wise'</p>
+                    
+                  <span id="layer">
+            
+                  </span>
+            </div>
+            
+      </div>
+
+      <div id="main_container">
+
+           <span id="trend_channel_id"> Trending Channel</span> 
+
+           <div id="trend_container">
+               <div class="product_card" th:each="data : ${trend_list}">
+
+                   <div class="pcard_header">
+                       <span th:text="'#'+${data.serial}+'---------PID = '+ ${data.pid}"> </span>
+                   </div>
+           
+           
+                   <div class="pcard_scene">
+
+                        <span>  Preview  </span>
+                        <img  th:src="${data.image}"/>
+
+                   </div>
+             
+                   <div class="pcard_appendix">
+              
+                        <div class="pcard_section">
+
+                            <div class="card_info_holder"> 
+                                <input th:id="${data.detail}" class="tick_details" type="checkbox"/>
+                                <label class="details" th:for="${data.detail}">  Details  </label>
+                                <div class="tablet_details">
+                                    <span> Gender : Male </span>
+                                    <span> Season : Summer </span>
+                                    <span> Item : Half-Shirt </span>
+                                    <span> Color  : Blue </span>
+                                </div>    
+                            </div>
+
+                            <div class="card_info_holder"> 
+                                <input th:id="${data.discount}" class="tick_discount" type="checkbox"/>
+                                <label class="discount" th:for="${data.discount}"> Discount </label>
+                                <div class="tablet_discount">
+                                    <span> Price: 400Tk </span>
+                                    <span> 5% per piece </span>
+                                </div>    
+                            </div>
+      
+                        </div>
+
+
+                       <div class="pcard_section">
+                           <div>
+                               <form  th:action="@{wishlist/add}"
+                                      th:object="${data}"
+                                      th:method="post">
+
+                                   <input class="product_add_btn" type="submit" value="Add to Wish-list" />
+                               </form>
+                           </div>
+                       </div>
+      
+                    </div>
+
+                </div>    
+                        
+           </div>
+
+
+           <span id="man_channel_id"> Man Channel</span> 
+
+           <div id="man_container">
+               <div class="product_card" th:each="data : ${man_list}">
+
+                   <div class="pcard_header">
+                       <span th:text="'#'+${data.serial}+'---------PID = '+ ${data.pid}"> </span>
+                   </div>
+           
+                   <div class="pcard_scene">
+
+                        <span>  Preview  </span>
+                        <img  th:src="${data.image}"/>
+
+                   </div>
+             
+                   <div class="pcard_appendix">
+              
+                        <div class="pcard_section">
+
+                            <div class="card_info_holder"> 
+                                <input th:id="${data.detail}" class="tick_details" type="checkbox"/>
+                                <label class="details" th:for="${data.detail}">  Details  </label>
+                                <div class="tablet_details">
+                                    <span> Gender : Male </span>
+                                    <span> Season : Summer </span>
+                                    <span> Item : Half-Shirt </span>
+                                    <span> Color  : Blue </span>
+                                </div>    
+                            </div>
+
+                            <div class="card_info_holder"> 
+                                <input th:id="${data.discount}" class="tick_discount" type="checkbox"/>
+                                <label class="discount" th:for="${data.discount}"> Discount </label>
+                                <div class="tablet_discount">
+                                    <span> Price: 400Tk </span>
+                                    <span> 5% per piece </span>
+                                </div>    
+                            </div>
+      
+                        </div>
+
+
+                       <div class="pcard_section">
+                           <div>
+                               <form  th:action="@{wishlist/add}"
+                                      th:object="${data}"
+                                      th:method="post">
+
+                                   <input class="product_add_btn" type="submit" value="Add to Wish-list" />
+                               </form>
+                           </div>
+                       </div>
+      
+                    </div>
+
+                </div>    
+                        
+           </div>
+
+          <span id="woman_channel_id"> Woman Channel</span>
+
+          <div id="woman_container">
+              <div class="product_card" th:each="data : ${woman_list}">
+
+                  <div class="pcard_header">
+                      <span th:text="'#'+${data.serial}+'---------PID = '+ ${data.pid}"> </span>
+                  </div>
+
+                  <div class="pcard_scene">
+
+                      <span>  Preview  </span>
+                      <img  th:src="${data.image}"/>
+
+                  </div>
+
+                  <div class="pcard_appendix">
+
+                      <div class="pcard_section">
+
+                          <div class="card_info_holder">
+                              <input th:id="${data.detail}" class="tick_details" type="checkbox"/>
+                              <label class="details" th:for="${data.detail}">  Details  </label>
+                              <div class="tablet_details">
+                                  <span> Gender : Female </span>
+                                  <span> Season : Summer </span>
+                                  <span> Item : Half-Shirt </span>
+                                  <span> Color  : Blue </span>
+                              </div>
+                          </div>
+
+                          <div class="card_info_holder">
+                              <input th:id="${data.discount}" class="tick_discount" type="checkbox"/>
+                              <label class="discount" th:for="${data.discount}"> Discount </label>
+                              <div class="tablet_discount">
+                                  <span> Price: 400Tk </span>
+                                  <span> 5% per piece </span>
+                              </div>
+                          </div>
+
+                      </div>
+
+
+                      <div class="pcard_section">
+                          <div>
+                              <form  th:action="@{wishlist/add}"
+                                     th:object="${data}"
+                                     th:method="post">
+
+                                  <input class="product_add_btn" type="submit" value="Add to Wish-list" />
+                              </form>
+                          </div>
+                      </div>
+
+                  </div>
+
+              </div>
+
+          </div>
+
+          <span id="child_channel_id"> Children Channel</span>
+
+          <div id="child_container">
+              <div class="product_card" th:each="data : ${child_list}">
+
+                  <div class="pcard_header">
+                      <span th:text="'#'+${data.serial}+'---------PID = '+ ${data.pid}"> </span>
+                  </div>
+
+
+                  <div class="pcard_scene">
+
+                      <span>  Preview  </span>
+                      <img  th:src="${data.image}"/>
+
+                  </div>
+
+                  <div class="pcard_appendix">
+
+                      <div class="pcard_section">
+
+                          <div class="card_info_holder">
+                              <input th:id="${data.detail}" class="tick_details" type="checkbox"/>
+                              <label class="details" th:for="${data.detail}">  Details  </label>
+                              <div class="tablet_details">
+                                  <span> Gender : Female </span>
+                                  <span> Season : Summer </span>
+                                  <span> Item : Half-Shirt </span>
+                                  <span> Color  : Blue </span>
+                              </div>
+                          </div>
+
+                          <div class="card_info_holder">
+                              <input th:id="${data.discount}" class="tick_discount" type="checkbox"/>
+                              <label class="discount" th:for="${data.discount}"> Discount </label>
+                              <div class="tablet_discount">
+                                  <span> Price: 400Tk </span>
+                                  <span> 5% per piece </span>
+                              </div>
+                          </div>
+
+                      </div>
+
+                      <div class="pcard_section">
+                          <div>
+                              <form  th:action="@{wishlist/add}"
+                                     th:object="${data}"
+                                     th:method="post">
+
+                                  <input class="product_add_btn" type="submit" value="Add to Wish-list" />
+                              </form>
+                          </div>
+                      </div>
+
+                  </div>
+
+              </div>
+
+          </div>
+
+      </div>
+
+    <div id="demography_container">
+        <div id="counter_title">
+            <span> Visited By [-Monthly-]</span>
+        </div>
+
+        <div id="counter_container">
+            <span class="counter counter_part01"
+                  th:classappend="|${v1_digit == 0 ? 'n0' : ''} ${v1_digit == 1 ? 'n1':''}
+                                  ${v1_digit == 2 ? 'n2':''} ${v1_digit == 3 ? 'n3':''}
+                                  ${v1_digit == 4 ? 'n4':''} ${v1_digit == 5 ? 'n5':''}
+                                  ${v1_digit == 6 ? 'n6':''} ${v1_digit == 7 ? 'n7':''}
+                                  ${v1_digit == 8 ? 'n8':''} ${v1_digit == 9 ? 'n9':''}|">
+            </span>
+
+            <span class="counter counter_part02"
+                  th:classappend="|${v2_digit == 0 ? 'n0' : ''} ${v2_digit == 1 ? 'n1':''}
+                                  ${v2_digit == 2 ? 'n2':''} ${v2_digit == 3 ? 'n3':''}
+                                  ${v2_digit == 4 ? 'n4':''} ${v2_digit == 5 ? 'n5':''}
+                                  ${v2_digit == 6 ? 'n6':''} ${v2_digit == 7 ? 'n7':''}
+                                  ${v2_digit == 8 ? 'n8':''} ${v2_digit == 9 ? 'n9':''}|">
+            </span>
+
+            <span class="counter counter_part03"
+                  th:classappend="|${v3_digit == 0 ? 'n0' : ''} ${v3_digit == 1 ? 'n1':''}
+                                  ${v3_digit == 2 ? 'n2':''} ${v3_digit == 3 ? 'n3':''}
+                                  ${v3_digit == 4 ? 'n4':''} ${v3_digit == 5 ? 'n5':''}
+                                  ${v3_digit == 6 ? 'n6':''} ${v3_digit == 7 ? 'n7':''}
+                                  ${v3_digit == 8 ? 'n8':''} ${v3_digit == 9 ? 'n9':''}|">
+            </span>
+
+            <span class="counter counter_part04"
+                  th:classappend="|${v4_digit == 0 ? 'n0' : ''} ${v4_digit == 1 ? 'n1':''}
+                                  ${v4_digit == 2 ? 'n2':''} ${v4_digit == 3 ? 'n3':''}
+                                  ${v4_digit == 4 ? 'n4':''} ${v4_digit == 5 ? 'n5':''}
+                                  ${v4_digit == 6 ? 'n6':''} ${v4_digit == 7 ? 'n7':''}
+                                  ${v4_digit == 8 ? 'n8':''} ${v4_digit == 9 ? 'n9':''}|">
+            </span>
+        </div>
+
+    </div>
+
+ </div>     
+
+</body>
+</html>

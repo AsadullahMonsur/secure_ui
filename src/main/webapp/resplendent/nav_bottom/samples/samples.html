@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="fragment_samples">
+<head>
+    <meta charset="UTF-8"
+          name="viewport"
+          content="width=device-width, initial-scale=1,  minimum-scale=1,maximum-scale=3, user-scalable=yes"/>
+    <title>Secure UI</title>
+
+
+    <link rel="stylesheet"
+          href="../static/css/nav_bottom/samples/samples.css"
+          th:href="@{/css/nav_bottom/samples/samples.css}"/>
+
+</head>
+<body>
+
+<div id="view_layout">
+
+    <div id="main_content">
+        <span id="finder_channel_id"> Searched Product Channel</span>
+
+        <div id="finder_container">
+            <div class="product_card" th:each="data : ${find_list}">
+
+                <div class="pcard_header">
+                    <span th:text="'#'+${data.serial}+'---------PID = '+ ${data.pid}"> </span>
+                </div>
+
+
+                <div class="pcard_scene">
+
+                    <span>  Preview  </span>
+                    <img  th:src="${data.image}"/>
+
+                </div>
+
+                <div class="pcard_appendix">
+
+                    <div class="pcard_section">
+
+                        <div class="card_info_holder">
+                            <input th:id="${data.detail}" class="tick_details" type="checkbox"/>
+                            <label class="details" th:for="${data.detail}">  Details  </label>
+                            <div class="tablet_details">
+                                <span> Gender : Male </span>
+                                <span> Season : Summer </span>
+                                <span> Item : Half-Shirt </span>
+                                <span> Color  : Blue </span>
+                            </div>
+                        </div>
+
+                        <div class="card_info_holder">
+                            <input th:id="${data.discount}" class="tick_discount" type="checkbox"/>
+                            <label class="discount" th:for="${data.discount}"> Discount </label>
+                            <div class="tablet_discount">
+                                <span> Price: 400Tk </span>
+                                <span> 5% per piece </span>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="pcard_section">
+                        <div>
+                            <form  th:action="@{wishlist/add}"
+                                   th:object="${data}"
+                                   th:method="post">
+
+                                <input class="product_add_btn" value="Add to Wish-list" type="submit"/>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

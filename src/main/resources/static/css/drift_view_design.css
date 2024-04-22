@@ -1,0 +1,196 @@
+html,body {
+    margin: 0;
+    padding: 0;
+}
+
+/*auto indent clt+shit+i*/
+/*this is the root holder*/
+
+.view_layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+}
+
+.view_layout div:nth-of-type(even){
+    min-height: inherit;
+    min-width: 150px;
+    visibility: inherit;
+    display: inherit;
+    flex-grow: 1;
+    background-color: rgb(24, 21, 21);
+}
+
+.view_layout div:nth-of-type(odd){
+  min-height: inherit;
+  min-width: 75px;
+  max-width: 75px;
+  visibility: inherit;
+  display: inherit;
+  flex-direction: inherit;
+  flex-grow: 1;
+  background-color: rgb(241, 238, 238);
+  justify-content: center;
+  align-items: center;
+}
+
+.view_layout div:nth-of-type(odd) nav {
+  min-height: inherit;
+  min-width: inherit;
+  visibility: inherit;
+  display: inherit;
+  flex-direction: inherit;
+  flex-grow: 1;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(221, 175, 175);
+
+}
+
+.view_layout div:nth-of-type(odd) nav ul {
+  min-height: inherit;
+  min-width: inherit;
+  visibility: inherit;
+  display: inherit;
+  flex-direction: column;
+  flex-grow: 1;
+  order: 1;
+  background-color: rgb(228, 138, 48);
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.view_layout div:nth-of-type(odd) nav ul:nth-child(n) li{
+  min-width: inherit;
+  min-height: max-content;
+  visibility: inherit;
+  display: inherit;
+  flex-direction: inherit;
+  flex-grow: 1;
+  background-color: rgb(70, 88, 70);
+}
+
+.view_layout div:nth-of-type(odd) nav ul li:nth-child(1) button{
+  visibility: inherit;
+  display: inherit;
+  flex-direction: inherit;
+  flex-grow: 1; 
+  justify-content: center;
+  align-items: center;
+  background-color: blue;
+  border: none;
+  stroke: none;
+}
+
+.view_layout div:nth-of-type(odd) nav ul li:nth-child(2) button{
+  visibility: inherit;
+  flex-grow: 1; 
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(217, 255, 0);
+  border: none;
+  stroke: none;
+}
+
+.view_layout div:nth-of-type(odd) nav ul li:nth-child(3) button{
+  flex-grow: 1; 
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 0, 149);
+  border: none;
+  stroke: none;
+}
+
+.view_layout div:nth-of-type(odd) nav ul li:nth-child(4) button{
+  flex-grow: 1; 
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 0, 0);
+  border: none;
+  stroke: none;
+}
+
+.view_layout div:nth-of-type(odd) nav ul li:nth-child(5) button{
+  flex-grow: 1; 
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(9, 255, 0);
+  border: none;
+  stroke: none;
+}
+
+.view_layout div:nth-of-type(odd) nav ul li:nth-child(6) button{
+  flex-grow: 1; 
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(0, 204, 255);
+  border: none;
+  stroke: none;
+}
+
+.view_layout div:nth-of-type(odd) nav ul li:nth-child(3) button:hover{
+  background-color: white;
+}
+
+.view_layout div:nth-of-type(even):hover ~ .view_layout div:nth-of-type(odd){
+  visibility: hidden;
+  background-color: khaki;
+}
+
+@media screen and (min-width: 512px) {
+    .view_layout{
+      min-height: 100vh;
+    }
+
+    .view_layout div:nth-of-type(odd){
+      max-width: 75px;
+      
+    }
+    .view_layout div:nth-of-type(even){
+      min-width: 150px;
+    }
+  }
+
+
+  @media screen and (min-width: 700px) {
+    .view_layout{
+      min-height: 100vh;
+    }
+
+    .view_layout div:nth-of-type(odd){
+      max-width: 165px;
+    }
+    .view_layout div:nth-of-type(even){
+      min-width: 360px;
+    }
+  }
+
+
+  @media screen and (min-width: 1024px) {
+    .view_layout{
+      min-height: 100vh;
+    }
+
+    .view_layout div:nth-of-type(odd){
+      max-width: 256px;
+    }
+    .view_layout div:nth-of-type(even){
+      min-width: 512px;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    .view_layout{
+      min-height: 100vh;
+    }
+
+    .view_layout div:nth-of-type(odd){
+      max-width: 288px;
+    }
+    .view_layout div:nth-of-type(even){
+      min-width: 700px;
+    }
+  }
+

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="fragment_account">
+<head>
+  <meta charset="UTF-8"
+        name="viewport"
+        content="width=device-width, initial-scale=1,  minimum-scale=1,maximum-scale=3, user-scalable=yes"/>
+  <title>Secure UI</title>
+
+
+  <link rel="stylesheet"
+        href="../static/css/nav_bottom/account/account.css"
+        th:href="@{/css/nav_bottom/account/account.css}"/>
+
+</head>
+<body>
+
+<div id="view_layout">
+
+    <img th:src="${background_img01}"/>
+
+    <div id="container">
+
+      <div id="preface" tabindex="0"  autofocus>
+
+        <div class="user_authentication">
+          <form action="#" class="form">
+              <h3>Create Account</h3>
+              <input class="inputs raw" type="text" placeholder="Enter Name" minlength="2" maxlength="25"  required/>
+              <input class="inputs email" type="email" placeholder="Enter mail" minlength="5" maxlength="50" required/>
+              
+              <input class="hide_btn" type="checkbox"/>
+              <input class="inputs password" type="text"
+                     placeholder="Enter password mixing sample format" minlength="6" maxlength="16" required/>
+              <span class="label passwordlabel"> [0-9]---[A-Z]---[a-z]---[!,@,#,$,%,&,*,?]</span>
+
+              <input class="inputs password" type="text"
+                     placeholder="Confirm Password" minlength="6" maxlength="16" required/>
+
+              <input class="resetting" type="reset" value="Reset"/>
+              <button type="submit"> Sign Up</button>
+
+          </form>
+        </div>
+    
+        <div class="user_authentication">
+          <form action="#" class="form">
+              <h3>Scroll Up for User Credenials</h3>
+              <input class="inputs email" type="email" placeholder="Enter mail" minlength="5" maxlength="50" required/>
+              <input class="hide_btn" type="checkbox"/>
+              <input class="inputs password" type="text"
+                     placeholder="Enter Password" minlength="6" maxlength="16" required/>
+              <span class="label passwordlabel"></span>
+              <a id="forget_password" href="#">Forget Password?</a>
+
+              <input class="resetting" type="reset" value="Reset"/>
+              <button type="submit">Sign In</button>
+          </form>
+        </div>
+  
+        <input id="switch" type="checkbox"/>
+        <label id="toggle_id" for="switch"></label>
+        <span id="blackbox" class="cover"> </span>
+     
+      </div>
+      
+      <div id="section_01" class="section" th:insert="~{ ${sectionfp} :: ${sectionf} }">
+
+      </div>
+
+      <div id="section_02" class="section">
+
+      </div>
+
+      <div id="section_03" class="section">
+
+      </div>
+
+
+    </div>
+</div>
+
+</body>
+</html>

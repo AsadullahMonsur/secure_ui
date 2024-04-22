@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"
+    name="viewport"
+    content="width=device-width, initial-scale=1,  minimum-scale=1,maximum-scale=3, user-scalable=yes"/>
+    <title>Secure UI</title>
+
+    <meta charset="UTF-8">
+
+</head>
+<body>
+
+<div id="profile_card" th:fragment="fragment_profile_card">
+
+    <div class="row">
+        <div class="column">
+            <span class="item_hint"> Name :</span>
+        </div>
+
+        <div class="column">
+            <span class="item_hint"> Email :</span>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="column">
+            <span class="item_hint"> Password :  ********** </span>
+        </div>
+
+        <div class="column">
+
+            <span class="item_hint"> Reset password :</span>
+            
+            <form action="#" class="forms" method="post">
+
+                <input id="reset_pass_id"
+                       class="inputsfp passwordfp"
+                       type="text"
+                       placeholder="Enter Password"
+                       minlength="6"
+                       maxlength="16" required/>
+
+                <button type="submit"> Click</button>
+
+            </form>  
+        </div>
+
+    </div>
+
+    <link rel="stylesheet"
+      href="../static/css/nav_bottom/account/profile_card.css"
+      th:href="@{/css/nav_bottom/account/profile_card.css}"/>
+</div>
+
+</body>
+</html>

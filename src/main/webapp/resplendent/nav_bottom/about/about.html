@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="fragment_about">
+<head>
+    <meta charset="UTF-8"
+          name="viewport"
+          content="width=device-width, initial-scale=1,  minimum-scale=1,maximum-scale=3, user-scalable=yes"/>
+    <title>Secure UI</title>
+
+    <link rel="stylesheet"
+          href="../static/css/nav_bottom/about/about.css"
+          th:href="@{/css/nav_bottom/about/about.css}"/>
+
+</head>
+<body>
+
+<div id="view_layout">
+
+    <label class="label" for="company_option"> Company </label> 
+    <input class="checkbox" id="company_option" type="checkbox" checked/>
+    <div id="company_section" class="section">
+        <span class="company_span"> Name : Cloght</span>
+        <span class="company_span"> It is a cloth products purchasing or e-exhibhition platform according to law of Almighty Creator</span>
+        <span id="website_span"> Website at: www.cloght.info </span>
+        <span class="company_span"> visit contract section to communicate with us</span>
+    </div>
+ 
+    <label class="label" for="product_option"> Product </label> 
+    <input class="checkbox" id="product_option" type="checkbox" />
+    <div id="product_section" class="section">
+        <span class="product_span"> By Allah's Mercy, we have total 50 different products in collection</span>
+        <span class="product_span"> available product categories : </span>
+
+        <div class="table2_view">
+
+            <div class="table2_column" th:each="data : ${list1}">
+
+                <div class="table2_row" th:each="item : ${data.elements}">
+
+                    <span th:text="${item}"></span>
+
+                </div>
+
+            </div>
+
+        </div>
+          
+    </div>
+ 
+    <label class="label" for="authority_option"> Authority </label> 
+    <input class="checkbox" id="authority_option" type="checkbox" />
+    <div id="authority_section" class="section">
+        <span class="authority_span"> we declare that we are bound to capacity given by Allah.
+                                    so, authority means 'authority given by Allah'</span>
+        <span class="authority_span"> we are n in numbers </span>
+
+        <div class="authority_list">
+
+            <div class="contact_profile_card">
+
+                <div>
+                    <img th:src="${authority.image}"/> 
+                </div>
+                <div>
+                    <span>Name: unknown</span>
+                </div>
+                <div>
+                    <span>Email: unknown@gmail.com</span>
+                </div>
+        
+            </div>
+    
+            <div class="contact_profile_card">
+    
+                <div>
+                    <img th:src="${authority.image}"/> 
+                </div>
+                <div>
+                    <span>Name: hashirun </span>
+                </div>
+                <div>
+                    <span>Email: hashirun1@gmail.com</span>
+                </div>
+        
+            </div>
+    
+            <div class="contact_profile_card">
+    
+                <div>
+                    <img th:src="${authority.image}"/> 
+                </div>
+                <div>
+                    <span>Name: fatema</span>
+                </div>
+                <div>
+                    <span>Email: fatema@gmail.com</span>
+                </div>
+        
+            </div>
+    
+            
+        </div>
+
+    </div>
+ 
+    <label class="label" for="customer_option"> Customer </label> 
+    <input class="checkbox" id="customer_option" type="checkbox" checked/>
+    <div id="customer_section" class="section">
+
+        <span class="customer_span"> By Allah's Help, we wish to provide our facilities world-wide</span>
+        <span class="customer_span"> Currently, we only have local customers with no online payment option</span>
+
+    </div>
+
+    <label class="label" for="vision_option"> Vision </label> 
+    <input class="checkbox" id="vision_option" type="checkbox"/>
+    <div id="vision_section" class="section">
+ 
+        <span class="vision_span"> our vision includes the following matters:</span>
+        <span class="vision_span">  search lawful provision(according to Allah's Command).</span>
+        <span class="vision_span">  provide appropiate products for customer.</span>
+        <span class="vision_span">  not to cheat customer [we won't give you defect products willingly].</span>
+        <span class="vision_span">  we keep only good products after realizing the standard of Allah [within our capacity].</span>
+   
+    </div>
+
+
+    <label class="label" for="term_option"> Terms & Conditions </label> 
+    <input class="checkbox" id="term_option" type="checkbox"/>
+    <div id="term_section" class="section">
+ 
+        <span class="term_span"> when we conduct with customers, the customers have to agree with us on following conditions:</span>
+        <span class="term_span">  we do not offer online payment (currently). even in future, we allow online transaction,
+                                  we will only allow 2 banks [sonali, islamic bank --remember no other payment
+                                  options] </span>
+
+        <span class="term_span">  we only show products for viewing purpose</span>
+        <span class="term_span">  customers have to physically come or order products with delivery charges</span>
+        <span class="term_span">  delivery charges includes sending and returning back fees only </span>
+        <span class="term_span">  if customer do not want the product after sending to the customer,
+                                  the customer have to pay delivery charges instantly [we take back our items]</span>
+
+        <span class="term_span">  if a customer order it (virtually), the customers have to send an email 
+                                  with his/her national identity card and verified residential address [security 
+                                  purpose and prevent frauds].
+                                  [but he/she does not need to pay money online]. after delivery is reached to home
+                                  and customer accept with signing[with delivery charges], and then 
+                                  he pays bill or reject [we take back our items]</span>
+
+        <span class="term_span"> if delivery person claims any extra money, immidiately call to our office number.
+                                 we will take action against the person</span>
+
+        <span class="term_span"> after receiving bill of products and final sign , we will not be responsible for further problems</span>
+                                  
+    </div>
+
+    <label class="label" for="website_option"> Site Contents & Programming </label> 
+    <input class="checkbox" id="website_option" type="checkbox"/>
+    <div id="website_section" class="section">
+
+
+         <div id="table_criterion" class="table3_view">
+               
+            <div class="table3_column" th:each="data : ${listp}">
+   
+                <div class="table3_row" th:each="item : ${data.elements}">
+             
+                    <span th:text="${item}"></span>
+                  
+                </div>
+             
+            </div>
+   
+        </div>
+
+          
+    </div>
+
+</div>
+
+</body>
+</html>

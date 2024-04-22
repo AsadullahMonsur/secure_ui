@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="fragment_wishlist">
+<head>
+    <meta charset="UTF-8"
+          name="viewport"
+          content="width=device-width, initial-scale=1,  minimum-scale=1,maximum-scale=3, user-scalable=yes"/>
+    <title>Secure UI</title>
+
+    <link rel="stylesheet"
+          href="../static/css/nav_bottom/wishlist/wishlist.css"
+          th:href="@{/css/nav_bottom/wishlist/wishlist.css}"/>
+
+</head>
+<body>
+
+<div id="view_layout">
+    <div class="table2_view">
+        <div class="table2_column" th:each="data : ${list3}">
+
+            <div class="table2_row" th:each="item,iterator : ${data.elements}">
+
+                <form action="#"  th:if="${item}!='X'" th:object="${item}" method="post">
+                    <span th:text="${item}"></span>
+                </form>
+
+                <form action="#" th:if="${item}=='X'"
+                                 th:action="@{wishlist/delete}"
+                                 class="forms"
+                                 method="post">
+                    <input type="number" th:value="${iterator.index}" name="index" hidden/>
+                    <button type="submit" th:text="${item}"></button>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="payment_section">
+
+        <div class="payment_header">
+            <form action="#"
+                  th:action="@{wishlist/bill}"
+                  class="payment_form"
+                  method="post">
+
+                <button type="submit"> Request Bill </button>
+             </form>
+        </div>
+
+        <div class="payment_footer">
+           <!-- <span th:text="${pdflink}" th:style="${pdflinkv}">  </span> -->
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

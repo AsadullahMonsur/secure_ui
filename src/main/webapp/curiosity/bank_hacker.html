@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"
+          name="viewport"
+          content="width=device-width, initial-scale=1,  minimum-scale=1,maximum-scale=3, user-scalable=yes"/>
+    <title> you Beauty</title>
+
+    <style>
+/*in the Name of Allah*/
+html,body {
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+/*auto indent clt+shit+i*/
+/*this is the root holder*/
+#view_layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(3, 3, 5);
+}
+
+#view_layout div{
+  min-height:100px;
+  max-height:200px;
+  margin: 50px;
+  color:white;
+  justify-content: center;
+  align-items: center;
+}
+
+#bong_prelim{
+  font-size:22px;
+  color:green;
+}
+
+#bong{
+  font-size:33px;
+  color:red;
+}
+</style>
+
+</head>
+<body>
+<div id="view_layout">
+      <div>
+         <!-- <img src="https://i.pinimg.com/originals/2c/85/95/2c85959f61d7f6b8187d4606ba388305.gif" /> -->
+      </div>
+
+       <div>
+           <p id="bong_prelim">Congratulations! You are old enough to hack this site.</p>
+
+           <p id="bong" th:text="${that_make_you_hooker}"> Ahh!</p>
+
+      </div>
+
+</div>
+</body>
+</html>

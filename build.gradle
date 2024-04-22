@@ -1,0 +1,47 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.3'
+	id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+	id 'java'
+	id 'war'
+}
+
+group = 'org.reservior'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+war{
+	enabled=false
+}
+
+bootWar{
+	enabled=true
+    webAppDirectory = file('src/main')
+}
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url 'https://repo.spring.io/snapshot' }
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'javax.validation:validation-api:2.0.1.Final'
+	implementation 'javax.servlet:javax.servlet-api:4.0.1'
+
+	implementation 'com.itextpdf:itextpdf:5.5.13.3'
+	implementation 'com.itextpdf.tool:xmlworker:5.5.13.3'
+	implementation 'com.itextpdf:html2pdf:5.0.2'
+	implementation 'com.itextpdf:kernel:8.0.2'
+	implementation 'org.xhtmlrenderer:flying-saucer-core:9.0.6'
+	implementation 'org.xhtmlrenderer:flying-saucer-pdf:9.0.6'
+
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
