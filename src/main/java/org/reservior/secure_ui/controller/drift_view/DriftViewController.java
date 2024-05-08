@@ -13,7 +13,7 @@ public class DriftViewController {
         model.addAttribute("drawer",
                             new DriftViewDrawer());
 
-        return "webapp/primary/drift_view";
-        //return "primary/drift_view";
+        //return "webapp/primary/drift_view";
+        return "primary/drift_view";
     }
 }

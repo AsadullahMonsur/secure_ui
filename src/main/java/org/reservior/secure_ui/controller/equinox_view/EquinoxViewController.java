@@ -43,6 +43,7 @@ public class EquinoxViewController {
         System.out.println("received request at ev : equinox view controller ");
         configure_session(session);
         view_amount++;
+        viewers = PerformUtility.number_to_digit(view_amount,viewers);
 
         EquinoxViewNavigationBar bar = EquinoxViewNavigationProcessor.process_main_tabs(0,8,nav_bar);
 
@@ -90,7 +91,7 @@ public class EquinoxViewController {
     private String trending(Model model, HttpSession session) {
         System.out.println("received request at trending : equinox view controller ");
         configure_session(session);
-        viewers = PerformUtility.number_to_digit(view_amount,viewers);
+
 
         EquinoxViewNavigationBar bar = EquinoxViewNavigationProcessor.process_main_tabs(1,8,nav_bar);
 

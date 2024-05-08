@@ -12,7 +12,7 @@ public class KiteViewController {
     private String display(Model model) {
         model.addAttribute("nav_bar",
                             new KiteViewNavigationBar());
-        return "webapp/primary/kite_view";
-        //return "primary/kite_view";
+        //return "webapp/primary/kite_view";
+        return "primary/kite_view";
     }
 }
