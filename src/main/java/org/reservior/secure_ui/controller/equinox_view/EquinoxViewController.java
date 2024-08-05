@@ -48,8 +48,8 @@ public class EquinoxViewController {
         EquinoxViewNavigationBar bar = EquinoxViewNavigationProcessor.process_main_tabs(0,8,nav_bar);
 
         model.addAttribute("nav_bar",bar);
+        //model.addAttribute("navfp","webapp/resplendent/nav_bottom/landing/landing.html");
         model.addAttribute("navfp","resplendent/nav_bottom/landing/landing.html");
-//        model.addAttribute("navfp","webapp/sample/results");
         model.addAttribute("navf", "fragment_landing");
         model.addAttribute("ld_filter",left_filter);
         model.addAttribute("rd_filter",right_filter);
@@ -97,7 +97,7 @@ public class EquinoxViewController {
 
         model.addAttribute("nav_bar",bar);
         model.addAttribute("navfp", "resplendent/nav_bottom/trending/trending");
-//        model.addAttribute("navfp", "webapp/resplendent/nav_bottom/trending/trending");
+        //model.addAttribute("navfp", "webapp/resplendent/nav_bottom/trending/trending");
         model.addAttribute("navf", "fragment_trending");
         model.addAttribute("trend_list", ProductDataInfo.get_data());
         model.addAttribute("man_list", ProductDataInfo.get_data());
@@ -125,7 +125,7 @@ public class EquinoxViewController {
 
         model.addAttribute("nav_bar",bar);
         model.addAttribute("navfp","resplendent/nav_bottom/about/about");
-//        model.addAttribute("navfp","webapp/resplendent/nav_bottom/about/about");
+       //model.addAttribute("navfp","webapp/resplendent/nav_bottom/about/about");
         model.addAttribute("navf", "fragment_about");
         model.addAttribute("list1",info.getList1());
         model.addAttribute("listp",info.getListp());
@@ -147,7 +147,7 @@ public class EquinoxViewController {
         EquinoxViewNavigationBar bar = EquinoxViewNavigationProcessor.process_main_tabs(3,8,nav_bar);
 
         model.addAttribute("nav_bar",bar);
-//        model.addAttribute("navfp","webapp/resplendent/nav_bottom/contact/contact");
+        //model.addAttribute("navfp","webapp/resplendent/nav_bottom/contact/contact");
         model.addAttribute("navfp","resplendent/nav_bottom/contact/contact");
         model.addAttribute("navf", "fragment_contact");
         model.addAttribute("ld_filter",left_filter);
@@ -167,15 +167,15 @@ public class EquinoxViewController {
 
         model.addAttribute("nav_bar",bar);
         model.addAttribute("navfp","resplendent/nav_bottom/samples/samples");
-//        model.addAttribute("navfp","webapp/resplendent/nav_bottom/samples/samples");
+        //model.addAttribute("navfp","webapp/resplendent/nav_bottom/samples/samples");
         model.addAttribute("navf", "fragment_samples");
         model.addAttribute("find_list", ProductDataInfo.get_data());
         model.addAttribute("ld_filter",left_filter);
         model.addAttribute("rd_filter",right_filter);
         model.addAttribute("search_filter",search_filter);
 
-//        return "webapp/resplendent/equinox_view";
-          return "resplendent/equinox_view"; // html directory path
+        //return "webapp/resplendent/equinox_view";
+        return "resplendent/equinox_view"; // html directory path
     }
 
     @PostMapping("samples/price_range")
@@ -208,7 +208,7 @@ public class EquinoxViewController {
 
         model.addAttribute("nav_bar",bar);
         model.addAttribute("navfp","resplendent/nav_bottom/wishlist/wishlist");
-        //model.addAttribute("navfp","webapp/sample/results");
+        //model.addAttribute("navfp","webapp/resplendent/nav_bottom/wishlist/wishlist");
         model.addAttribute("navf", "fragment_wishlist");
         model.addAttribute("ld_filter",left_filter);
         model.addAttribute("rd_filter",right_filter);
@@ -222,12 +222,12 @@ public class EquinoxViewController {
     }
 
     @PostMapping("wishlist/add")
-    private String on_wishlist_item_add(Model model,@Valid Product product, BindingResult result){
-       // List<TableData> item =  info_wishlist.add_list3_data(data);
-        //model.addAttribute("list3",item);
+    private String on_wishlist_item_add(Model model,Product data){
+        // the parameter data must refer to thymeleaf object value [hint: input hidden]
+         System.out.println("product Id: "+data.getPid());
 
-        //System.out.println("product Id: "+data);
-        System.out.println("add to wishlist:  "+product.getPid());
+         List<TableData> item =  info_wishlist.add_list3_data(data.getPid());
+         model.addAttribute("list3",item);
 
         return "redirect:/view/wishlist";
     }
@@ -267,8 +267,8 @@ public class EquinoxViewController {
         model.addAttribute("rd_filter",right_filter);
         model.addAttribute("search_filter",search_filter);
         model.addAttribute("background_img01","/image/nav_bar/accounts/dark_forest.jpg");
-
         model.addAttribute("sectionfp","resplendent/nav_bottom/account/profile_card.html");
+        //model.addAttribute("sectionfp","webapp/resplendent/nav_bottom/account/profile_card.html");
         model.addAttribute("sectionf", "fragment_profile_card");
 
         //return "webapp/resplendent/equinox_view";

@@ -6,10 +6,7 @@ import java.io.IOException;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 
 @WebFilter
 public class SecureUiFilter implements Filter {
@@ -29,6 +26,30 @@ public class SecureUiFilter implements Filter {
         System.out.println("Remote Host:"+hsrequest.getRemoteHost());
         System.out.println("Remote Address:"+hsrequest.getRemoteAddr());
         System.out.println("Requested Path:"+hsrequest.getRequestURI());
+        System.out.println("Requested URL:"+hsrequest.getRequestURL());
+
+        String secure_url = "";
+
+        if(!hsrequest.isSecure()){
+            String data = hsrequest.getRequestURL().toString();
+            String []range = data.split(":");
+
+            if(range[0].equals("http")){
+                 String modification = data.replace("http","https");
+                 if(data.contains("8080")){
+                     modification = modification.replace("8080","7298");
+                 }
+
+                 secure_url = modification;
+            }
+            else {
+                secure_url = data;
+            }
+
+            System.out.println("Redirected URL:"+secure_url);
+            hsresponse.sendRedirect(secure_url);
+            return;
+        }
 
         hsresponse.setHeader("cache-control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
         hsresponse.setHeader("pragma", "no-cache"); // HTTP 1.0.

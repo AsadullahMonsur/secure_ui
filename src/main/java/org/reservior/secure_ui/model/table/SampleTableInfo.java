@@ -1,7 +1,5 @@
 package org.reservior.secure_ui.model.table;
 
-import org.reservior.secure_ui.model.product.ProductDataInfo;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,7 +87,7 @@ public class SampleTableInfo {
         data8.add("Java-11");
         data8.add("Gradle");
         data8.add("Mongo-DB");
-        data8.add("Amazon");
+        data8.add("Self-Hosted");
 
 
         TableData td = new TableData(data);
@@ -137,13 +135,13 @@ public class SampleTableInfo {
 
         List<String> data10 = new ArrayList<String>();
         data10.add("Product Id");
-        data10.add("#001");
-        data10.add("#002");
-        data10.add("#003");
-        data10.add("#004");
-        data10.add("#005");
-        data10.add("#006");
-        data10.add("#007");
+        data10.add("#0001");
+        data10.add("#0002");
+        data10.add("#0003");
+        data10.add("#0004");
+        data10.add("#0005");
+        data10.add("#0006");
+        data10.add("#0007");
         data10.add("Full List's Price = ");
 
         List<String> data11 = new ArrayList<String>();
@@ -169,7 +167,7 @@ public class SampleTableInfo {
         data12.add("");
 
         List<String> data13 = new ArrayList<String>();
-        data13.add("Per Item [USD]");
+        data13.add("Per Item [BDT]");
         data13.add("10");
         data13.add("14");
         data13.add("5");
@@ -180,7 +178,7 @@ public class SampleTableInfo {
         data13.add("");
 
         List<String> data14 = new ArrayList<String>();
-        data14.add("Total Price [USD]");
+        data14.add("Total Price [BDT]");
         data14.add("70");
         data14.add("28");
         data14.add("15");
@@ -246,11 +244,71 @@ public class SampleTableInfo {
         return re_total();
     }
 
-//    public List<TableData> add_list3_data(ProductDataInfo data){
-//        getList3().add(data);
-//
-//        return re_total();
-//    }
+    public List<TableData> add_list3_data(String pid){
+        //search index of pid
+        boolean flag = false;
+        int index = 0;
+        List<String>  abc = list3.get(1).getElements();
+
+        for(int i=0; i<abc.size();i++){
+            if(abc.get(i).equals(pid)){
+                index = i;
+                flag = true;
+            }
+        }
+
+        if(flag){
+            System.out.println("Duplicate ID :" +pid);
+
+            String value1 = list3.get(3).getElements().get(index);
+            int amount = Integer.parseInt(value1);
+            list3.get(3).getElements().set(index,(++amount)+"");
+            System.out.println("amount:"+amount);
+
+            String value2 = list3.get(4).getElements().get(index);
+            int per_item_price = Integer.parseInt(value2);
+            System.out.println("per item:"+per_item_price);
+
+            String value3 = list3.get(5).getElements().get(index);
+            int total_price = per_item_price * amount;
+            list3.get(5).getElements().set(index,total_price+"");
+            System.out.println("total:"+total_price);
+        }
+        else {
+            System.out.println("New ID Added:" +pid);
+
+            list3.get(0).getElements().remove(list3.get(0).getElements().size()-1);
+            list3.get(0).getElements().add(list3.get(0).getElements().size()+"");
+            list3.get(0).getElements().add("");
+
+            list3.get(1).getElements().remove(list3.get(1).getElements().size()-1);
+            list3.get(1).getElements().add(pid);
+            list3.get(1).getElements().add("");
+
+            list3.get(2).getElements().remove(list3.get(2).getElements().size()-1);
+            list3.get(2).getElements().add("It is an item");
+            list3.get(2).getElements().add("");
+
+            list3.get(3).getElements().remove(list3.get(3).getElements().size()-1);
+            list3.get(3).getElements().add(1+"");
+            list3.get(3).getElements().add("");
+
+            list3.get(4).getElements().remove(list3.get(4).getElements().size()-1);
+            list3.get(4).getElements().add(17+"");
+            list3.get(4).getElements().add("");
+
+            list3.get(5).getElements().remove(list3.get(5).getElements().size()-1);
+            list3.get(5).getElements().add(17+"");
+            list3.get(5).getElements().add("");
+
+            list3.get(6).getElements().remove(list3.get(6).getElements().size()-1);
+            list3.get(6).getElements().add("X");
+            list3.get(6).getElements().add("");
+        }
+
+
+        return re_total();
+    }
 
     private  List<TableData> re_total(){
         TableData data = getList3().get(getList3().size()-2);

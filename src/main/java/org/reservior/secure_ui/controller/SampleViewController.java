@@ -27,7 +27,7 @@ public class SampleViewController {
         System.out.println(personForm.toString());
         if (bindingResult.hasErrors()) {
             System.out.println("inside"+bindingResult.toString());
-            return "sample/index";
+            return "webapp/sample/index";
         }
         return "sample/results";
         //return "webapp/sample/results";

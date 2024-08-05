@@ -67,6 +67,8 @@
                                    th:object="${data}"
                                    th:method="post">
 
+                                <input type="text" th:value="${data.pid}" name="pid" hidden/>
+                                <input type="text" th:value="${data.detail}" name="detail" hidden/>
                                 <input class="product_add_btn" value="Add to Wish-list" type="submit"/>
                             </form>
                         </div>
