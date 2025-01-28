@@ -18,6 +18,7 @@ bootWar{
     webAppDirectory = file('src/main')
 }
 
+
 repositories {
 	mavenCentral()
 	maven { url 'https://repo.spring.io/milestone' }
@@ -30,6 +31,7 @@ repositories {
 
 dependencies {
 	implementation files('src/main/libs/*.jar')
+	implementation fileTree(dir: 'libs', include: ['*.jar'])
 
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'

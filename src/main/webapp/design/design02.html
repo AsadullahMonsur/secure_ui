@@ -1,0 +1,634 @@
+<html xmlns:th="http://www.thymeleaf.org"><head>
+    <meta lang="en" charset="UTF-8"
+          name="viewport" content="width=device-width, initial-scale=1,  minimum-scale=1,maximum-scale=3, user-scalable=yes">
+
+    <meta http-equiv="cache-control" content="max-age=0, no-cache, no-store, must-revalidate, private">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+
+    <title>UI Hut</title>
+    <!--
+        <link rel="stylesheet"
+              href="../static/css/equinox_view_design.css"
+              th:href="@{/css/equinox_view_design.css}"/> -->
+
+    <link rel="icon" th:href="@{/image/favicon/orange.png}">
+
+    <style>
+        /*in the Name of Allah*/
+  html,body {
+    margin: 0;
+    padding: 0;
+    --banner-flag: 100px;
+    --max-height:100vh;
+    --max-width: 100vw;
+
+    --notification-panel-background:white;
+    --notification-panel-width:312px;
+    --notification-panel-height:128px;
+    --notification-panel-header-background: black;
+    --notification-panel-content-background:rgb(116, 116, 116);
+
+
+
+            --table2_view-background:rgba(212, 212, 183, 0.137);
+            --table2_row-odd-background:#3d3d3f;
+            --table2_row-even-background:#3d3d3f;
+            --table2_row-bottom-border-color:#676769;
+            --table2_row-hover:rgba(38, 87, 179, 0.842);
+            --table2_row-hover-left-border-color:rgb(215, 238, 8);
+            --table2_row-hover-right-border-color:rgb(252, 9, 82);
+            --table2_row-clear-item-background:rgb(49, 51, 51);
+            --table2_row-clear-item-font-color:red;
+            --table2_row-header-font-color: rgb(37, 201, 5);
+            --table2_row-content-font-color: rgb(255, 255, 255);
+  }
+  /*auto indent clt+shit+i*/
+  /*this is the root holder*/
+  #view_layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  background: rgb(116, 116, 116);
+  }
+
+.content{
+  min-width:100%;
+  display: flex;
+  flex-grow:1;
+}
+
+.content:nth-child(1){
+  min-height:50px;
+  color:white;
+  font-size:25px;
+  align-items:center;
+  justify-content:center;
+}
+
+.content:nth-child(2){
+  flex-direction: row;
+}
+
+.content:nth-child(3){
+  flex-direction: column;
+}
+        .table2_view{
+            margin:75px;
+            max-width: 80%;
+            display: flex;
+            flex-direction: row;
+            align-self:center;
+            background: var(--table2_view-background);
+            box-shadow: 0 4px 8px 0 rgba(43, 44, 43, 0.514);
+            z-index: 2;
+            overflow: scroll;
+        }
+
+        .table2_view:hover{
+            box-shadow: 8px 8px 16px 8px rgba(33, 34, 34, 0.459);
+        }
+
+
+        .table2_row{
+            min-height: 50px;
+            max-height: 50px;
+            display: flex;
+            flex-direction: row;
+            background: transparent;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--table2_row-bottom-border-color);
+        }
+
+        .table2_row:hover{
+            border-left: 3px solid var(--table2_row-hover-left-border-color);
+            border-right: 3px solid var(--table2_row-hover-right-border-color);
+        }
+
+
+        .table2_column{
+            min-width: 150px;
+            display: flex;
+            flex-direction: column;
+            background: transparent;
+        }
+
+
+        .table2_column .table2_row:nth-child(odd){
+        background: var(--table2_row-odd-background);
+        }
+
+        .table2_column:nth-child(odd) .table2_row:hover{
+            background: var(--table2_row-hover);
+        }
+
+        .table2_column .table2_row:nth-child(even){
+        background: var(--table2_row-even-background);
+        }
+
+        .table2_column:nth-child(even) .table2_row:hover{
+            background: var(--table2_row-hover);
+        }
+
+        .table2_row:nth-child(1){
+           border-bottom: 1px solid var(--table2_row-bottom-border-color);
+        }
+
+        .table2_row:nth-child(1) span{
+            color:var(--table2_row-header-font-color);
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+            font-stretch: extra-expanded;
+            font-style: italic;
+        }
+
+        .table2_row:nth-of-type(n+2) span{
+            color: var(--table2_row-content-font-color);
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .table2_view forms button{
+        min-width:40px;
+        min-height: 24px;
+        color: var(--table2_row-clear-item-font-color);
+        background: var(--table2_row-clear-item-background);
+        border: none;
+        outline: none;
+        }
+
+  .filter_container{
+  min-width:100%;
+    min-height: 48px;
+    max-height: 48px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    background: rgb(0, 0, 0);
+    box-shadow: 5px 5px 15px 5px rgb(19, 19, 19);
+  }
+
+  .filter_container form{
+    min-height: 100%;
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+    background: transparent;
+  }
+
+  .filter_container nav{
+min-height: inherit;
+max-height: inherit;
+visibility: inherit;
+display: flex;
+flex-direction: inherit;
+flex-grow: 1;
+background: transparent;
+}
+
+.filter_container nav ul {
+min-height: inherit;
+max-height: inherit;
+padding: 0;
+margin: 0;
+visibility: inherit;
+display: inherit;
+flex-direction: row;
+flex-grow: 1;
+flex-wrap: wrap;
+list-style-type: none;
+background-color: transparent;
+}
+
+.filter_container nav ul li{
+  position: relative;
+  min-height: inherit;
+  max-height: inherit;
+visibility: inherit;
+display: inherit;
+flex-direction: inherit;
+flex-grow: 1;
+background: transparent;
+color: white;
+align-items: center;
+justify-content: center;
+transition: 0.75s;
+}
+
+.filter_container nav ul li:hover{
+background: rgb(74, 112, 194);
+}
+
+.filter_checkbox{
+  visibility:collapse;
+}
+
+
+#filter_alphabet_checkbox:checked ~ #filter_overflow_panel_alphabet{
+display: flex;
+}
+
+#filter_alphabet_checkbox:not(:checked) ~ #filter_overflow_panel_alphabet{
+display: none;
+}
+
+#filter_date_checkbox:checked ~ #filter_overflow_panel_date{
+  display: flex;
+}
+
+#filter_date_checkbox:not(:checked) ~ #filter_overflow_panel_date{
+  display: none;
+}
+
+#filter_price_checkbox:checked ~ #filter_overflow_panel_price{
+display: flex;
+}
+
+#filter_price_checkbox:not(:checked) ~ #filter_overflow_panel_price{
+display: none;
+}
+
+
+#filter_gender_checkbox:checked ~ #filter_overflow_panel_gender{
+  display: flex;
+}
+
+#filter_gender_checkbox:not(:checked) ~ #filter_overflow_panel_gender{
+  display: none;
+}
+
+#filter_sort_checkbox:checked ~ #filter_overflow_panel_sort{
+  display: flex;
+}
+
+#filter_sort_checkbox:not(:checked) ~ #filter_overflow_panel_sort{
+  display: none;
+}
+
+
+.filter_overflow_panel{
+top: 48px;
+position: absolute;
+min-width: 256px;
+min-height: 64px;
+display: flex;
+flex-direction: row;
+background: white;
+color:black;
+align-items: center;
+justify-content: center;
+}
+
+.filter_overflow_panel label{
+display: flex;
+flex-direction: row;
+flex-grow: 1;
+align-items: center;
+justify-content: center;
+}
+
+.filter_sorting{
+min-width: 24px;
+min-height: 24px;
+display: flex;
+flex-direction: row;
+flex-grow: 1;
+}
+
+#filter_sort_ascending_label{
+order: 2;
+}
+#filter_sort_ascending{
+order: 1;
+}
+
+#filter_sort_descending_label{
+order: 4;
+}
+#filter_sort_descending{
+order: 3;
+}
+
+#filter_overflow_panel_alphabet{
+left: 0px;
+}
+
+#filter_alphabet_label{
+display: flex;
+flex-direction: row;
+flex-grow: 1;
+align-items: center;
+justify-content: center;
+order: 2;
+}
+
+#filter_alphabet{
+order: 1;
+}
+
+.filter_alphabet{
+  min-height: 24px;
+  min-width: 24px;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+#filter_alphabet_reset_button{
+margin: 10px;
+display: flex;
+flex-grow: 2;
+order: 3;
+}
+
+#filter_price_label{
+display: flex;
+flex-direction: row;
+flex-grow: 1;
+align-items: center;
+justify-content: center;
+order: 2;
+}
+
+#filter_price{
+order: 1;
+}
+
+.filter_pricing{
+  min-height: 24px;
+  min-width: 24px;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+#filter_price_reset_button{
+margin: 10px;
+display: flex;
+flex-grow: 2;
+order: 3;
+}
+
+.filter_dateformat{
+min-width: 24px;
+min-height: 24px;
+display: flex;
+flex-direction: row;
+flex-grow: 1;
+}
+
+#filter_date_plain_label{
+order: 2;
+}
+#filter_date_plain{
+order: 1;
+}
+
+#filter_date_premium_label{
+order: 4;
+}
+#filter_date_premium{
+order: 3;
+}
+
+#filter_date_reset_button{
+margin: 10px;
+display: flex;
+flex-grow: 2;
+order: 5;
+}
+
+
+.filter_gender{
+min-width: 24px;
+min-height: 24px;
+display: flex;
+flex-direction: row;
+flex-grow: 1;
+}
+
+#filter_gender_male_label{
+order: 2;
+}
+#filter_gender_male{
+order: 1;
+}
+
+#filter_gender_female_label{
+order: 4;
+}
+#filter_gender_female{
+order: 3;
+}
+
+#filter_gender_reset_button{
+margin: 10px;
+display: flex;
+flex-grow: 2;
+order: 5;
+}
+
+.form_submit{
+  min-height: 100%;
+  display: flex;
+  flex-grow: 1;
+  color: white;
+  background: rgba(0, 128, 0, 0.603);;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.form_submit:hover{
+  background: green;
+}
+
+  @media screen and (min-height: 500px) {
+  #view_layout {
+    min-height: 100vh;
+  }
+  }
+
+  @media screen and (min-height: 700px) {
+  #view_layout {
+    min-height: 100vh;
+  }
+  }
+
+  @media screen and (min-height: 1024px) {
+  #view_layout {
+    min-height: 100vh;
+  }
+
+  }
+
+  @media screen and (min-height: 1280px) {
+  #view_layout {
+    min-height: 100vh;
+  }
+
+  }
+
+  @media screen and (max-width: 500px) {
+  }
+
+  @media screen and (min-width: 500px) {
+  }
+
+  @media screen and (min-width: 700px) {
+  }
+
+  @media screen and (min-width: 1024px) {
+  }
+
+  @media screen and (min-width: 1280px) {
+  }
+
+    </style>
+
+</head>
+<body>
+
+<div id="view_layout">
+    <div class="content">
+        <span> Currently filter by Date & Sort options are available only</span>
+    </div>
+
+  <div class="content">
+      <div class="filter_container">
+
+          <form th:action="@{filter01/filter}" th:object="${data_filter}" method="post">
+              <nav>
+                  <ul>
+                      <li>
+
+                          <label id="filter_alphabet_checkbox_label" for="filter_alphabet_checkbox">  Alphabetic </label>
+                          <input id="filter_alphabet_checkbox" class="filter_checkbox" type="checkbox"/>
+
+                          <div id="filter_overflow_panel_alphabet" class="filter_overflow_panel">
+                              <label id="filter_alphabet_label" for="filter_alphabet"> Include</label>
+                              <input id="filter_alphabet" class="filter_pricing" type="radio" name="selection" value="Include" />
+
+                              <input id="filter_alphabet_reset_button" type="reset" />
+
+                          </div>
+                      </li>
+
+                      <li>
+                          <label id="filter_date_checkbox_label" for="filter_date_checkbox"> Date </label>
+                          <input id="filter_date_checkbox" class="filter_checkbox" type="checkbox"/>
+
+                          <div id="filter_overflow_panel_date" class="filter_overflow_panel">
+
+                              <label id="filter_date_plain_label" for="filter_date_plain"> Plain </label>
+                              <input id="filter_date_plain" class="filter_dateformat" th:field="*{date_selection}" type="radio" name="selection" value="Plain" />
+
+                              <label id="filter_date_premium_label" for="filter_date_premium"> Premium </label>
+                              <input id="filter_date_premium" class="filter_dateformat" th:field="*{date_selection}" type="radio" name="selection" value="Premium" />
+
+                             <!-- <input id="filter_date_reset_button" type="reset"/> -->
+                          </div>
+                      </li>
+
+                      <li>
+
+                          <label id="filter_price_checkbox_label" for="filter_price_checkbox"> Price</label>
+                          <input id="filter_price_checkbox" class="filter_checkbox" type="checkbox"/>
+
+                          <div id="filter_overflow_panel_price" class="filter_overflow_panel">
+                              <label id="filter_price_label" for="filter_price"> Include</label>
+                              <input id="filter_price" class="filter_pricing" type="radio" name="selection" value="Include" />
+
+                              <input id="filter_price_reset_button" type="reset" />
+
+                          </div>
+                      </li>
+
+                      <li>
+                          Size
+                      </li>
+
+                      <li>
+                          Color
+                      </li>
+
+                      <li>
+                          <label id="filter_gender_checkbox_label" for="filter_gender_checkbox"> Gender </label>
+                          <input id="filter_gender_checkbox" class="filter_checkbox" type="checkbox"/>
+
+                          <div id="filter_overflow_panel_gender" class="filter_overflow_panel">
+                              <label id="filter_gender_male_label" for="filter_gender_male"> Male </label>
+                              <input id="filter_gender_male" class="filter_gender" type="radio" name="selection" value="Male" />
+
+                              <label id="filter_gender_female_label" for="filter_gender_female"> Female </label>
+                              <input id="filter_gender_female" class="filter_gender" type="radio" name="selection" value="Female" />
+
+                          <!--    <input id="filter_gender_reset_button" type="reset" /> -->
+                          </div>
+                      </li>
+
+                      <li>
+
+                          <label id="filter_sort_checkbox_label" for="filter_sort_checkbox"> Sort </label>
+                          <input id="filter_sort_checkbox" class="filter_checkbox" type="checkbox"/>
+
+                          <div id="filter_overflow_panel_sort" class="filter_overflow_panel">
+                              <label id="filter_sort_ascending_label" for="filter_sort_ascending"> Ascending </label>
+                              <input id="filter_sort_ascending" class="filter_sorting" th:field="*{sort_selection}" type="radio" name="selection" value="Ascending" checked/>
+
+                              <label id="filter_sort_descending_label" for="filter_sort_descending"> Descending </label>
+                              <input id="filter_sort_descending" class="filter_sorting" th:field="*{sort_selection}" type="radio"  name="selection" value="Descending" />
+
+                          </div>
+
+                      </li>
+
+                      <li>
+
+                          <button class="form_submit" type="submit"> Apply </button>
+
+                      </li>
+
+                  </ul>
+              </nav>
+          </form>
+
+      </div>
+
+  </div>
+
+
+  <div class="content">
+      <div class="table2_view">
+          <div class="table2_column" th:each="data : ${list}">
+
+              <div class="table2_row" th:each="item,iterator : ${data.elements}">
+
+                  <form action="#"  th:if="${item}!='X'" th:object="${item}" method="post">
+                      <span th:text="${item}"></span>
+                  </form>
+
+                  <!--
+                  <form action="#" th:if="${item}=='X'"
+                        th:action="@{tableview/delete}"
+                        class="forms"
+                        method="post">
+                      <input type="number" th:value="${iterator.index}" name="index" hidden/>
+                      <button type="submit" th:text="${item}"></button>
+                  </form>
+                  -->
+              </div>
+
+          </div>
+      </div>
+
+  </div>
+
+</div>
+
+</body>
+
+</html>
