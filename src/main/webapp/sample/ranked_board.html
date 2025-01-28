@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" http-equiv="refresh" content="7">
+    <title>Board 7 sec</title>
+
+    <style>
+        /*in the Name of Allah*/
+        html,body {
+            margin: 0;
+            padding: 0;
+            background:rgb(47, 48, 49);
+            background-size: cover;
+            /*
+            background:rgb(47, 48, 49);
+            background: url('https://wallpaperaccess.com/full/636414.jpg');
+            */
+            color: whitesmoke;
+        }
+        /*auto indent clt+shit+i*/
+        /*this is the root holder*/
+        #view_layout {
+          margin: 100px;
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .layer { 
+          max-height: 50px;
+          display: flex;
+          flex-direction: row;
+          flex-grow: 1;
+          align-items: center;
+          justify-content: center;
+          color: whitesmoke;
+          border:none;
+          background: rgba(0, 0, 0, 0.438);
+          text-shadow:  0 0 5px white,
+                        0 0 10px white,
+                        0 0 20px white,
+                        0 0 50px white,
+                        0 0 70px white,
+                        0 0 100px white;
+          transition: 1s;
+        }
+
+        .layer:hover {
+          /*background: rgba(3, 14, 71, 0.719);*/
+          background: white;
+          box-shadow: 3px 5px rgb(3, 14, 71);
+          text-shadow:  0 0 10px rgb(24, 26, 24),
+                        0 0 20px rgb(17, 67, 230),
+                        0 0 40px rgb(24, 26, 24),
+                        0 0 80px rgb(17, 67, 230),
+                        0 0 120px rgb(17, 67, 230),
+                        0 0 160px rgb(24, 26, 24);
+          color: rgb(26, 27, 26);
+          font-size: x-large;
+          font-weight: bolder;
+        }
+        
+        </style>
+    
+    </head>
+<body>
+      <p th:text="${rank}"> Ahh!</p>
+
+       <div id="view_layout">
+            <span class="layer" th:style="'order:'+ ${rank1} +';'">
+                A
+            </span>
+            <span class="layer" th:style="'order:'+ ${rank2} +';'">
+                B
+            </span>
+            <span class="layer" th:style="'order:'+ ${rank3} +';'">
+                C
+            </span>
+            <span class="layer" th:style="'order:'+ ${rank4} +';'">
+                D
+            </span>
+
+            <span class="layer" th:style="'order:'+ ${rank5} +';'">
+                E
+            </span>
+
+            <span class="layer" th:style="'order:'+ ${rank6} +';'">
+                F
+            </span>
+            <span class="layer" th:style="'order:'+ ${rank7} +';'">
+                G
+            </span>
+        </div>
+    </body>
+</html>
