@@ -1,9 +1,19 @@
 package org.reservior.secure_ui.service;
 
-import com.itextpdf.html2pdf.HtmlConverter;
-import org.springframework.stereotype.Service;
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Image;
+import com.itextpdf.layout.element.Paragraph;
 
-import javax.servlet.ServletInputStream;
+import org.reservior.secure_ui.model.invoice.InvoicePlainFormat;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -23,7 +33,33 @@ public class InvoiceService {
             String value = "attachment; filename=invoice_"+time +".pdf";
             response.setHeader(key,value);
 
-            HtmlConverter.convertToPdf(request.getInputStream(),response.getOutputStream());
+            PdfWriter writer = new PdfWriter(response.getOutputStream());
+            PdfDocument pdf_document = new PdfDocument(writer);
+            Document document = new Document(pdf_document);
+
+            String location = "decoration.png";
+            Resource resource = new ClassPathResource("images/" +location);
+            //Files.readAllBytes(resource.getFile().toPath()
+            byte[] byte_data = FileCopyUtils.copyToByteArray(resource.getInputStream());
+            ImageData image_data = ImageDataFactory.create(byte_data);
+            Image image = new Image(image_data);
+
+            float watermark_x = (pdf_document.getDefaultPageSize().getWidth() - 200)/2;
+            float watermark_y = (pdf_document.getDefaultPageSize().getHeight() - 200)/2;
+
+            image.scaleToFit(200,200);
+            image.setOpacity(0.1f);
+            image.setFixedPosition(watermark_x,watermark_y);
+            document.add(image);
+
+            document.add(new Paragraph(InvoicePlainFormat.header()));
+            document.add(new Paragraph(InvoicePlainFormat.dots()));
+            document.add(new Paragraph(InvoicePlainFormat.payment_information()));
+            document.add(new Paragraph(InvoicePlainFormat.dots()));
+            document.add(new Paragraph(InvoicePlainFormat.terms_information()));
+            document.flush();
+            document.close();
+
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -31,6 +67,10 @@ public class InvoiceService {
     }
 
     /*
+
+            //this part is direct convert without pdf writer
+            //HtmlConverter.convertToPdf(request.getInputStream(),output_stream);
+
              ClassLoaderTemplateResolver resolver = new ClassLoaderTemplateResolver();
             resolver.setSuffix(".html");
             resolver.setTemplateMode("HTML");
@@ -53,6 +93,29 @@ public class InvoiceService {
             renderer.layout();
             renderer.createPDF(response.getOutputStream());
             renderer.finishPDF();
+
+ ***********
+
+        Context context = new Context();
+        context.setVariable("name", model.getAttribute("pdflink"));
+
+        TemplateEngine engine = new SpringTemplateEngine();
+        // Render HTML as a String
+        String htmlContent = engine.process("template.html",context);
+
+        byte[] pdfBytes = PdfService.generatePdf(htmlContent);
+
+        // Set response properties
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition", "attachment; filename=generated.pdf");
+        response.setContentLength(pdfBytes.length);
+
+        try {
+            response.getOutputStream().write(pdfBytes);
+            response.getOutputStream().flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     */
 }

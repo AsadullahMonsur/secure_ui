@@ -1,427 +1,442 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"
-          name="viewport"
-          content="width=device-width, initial-scale=1,  minimum-scale=1,maximum-scale=3, user-scalable=yes"/>
+  <head>
+    <meta
+      charset="UTF-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1,  minimum-scale=1,maximum-scale=3, user-scalable=yes"
+    />
 
-    <meta http-equiv="cache-control" content="max-age=0, no-cache, no-store, must-revalidate, private">
-    <meta http-equiv="pragma" content="no-cache">
-    <meta http-equiv="expires" content="0">
+    <meta
+      http-equiv="cache-control"
+      content="max-age=0, no-cache, no-store, must-revalidate, private"
+    />
+    <meta http-equiv="pragma" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
 
     <title>Secure UI</title>
-    <link rel="stylesheet"
-          href="../static/css/equinox_view_design.css"
-          th:href="@{/css/equinox_view_design.css}"/>
+    <link
+      rel="stylesheet"
+      href="../static/css/equinox_view_design.css"
+      th:href="@{/css/equinox_view_design.css}"
+    />
 
-    <link rel="icon" th:href="@{/image/favicon/favon.png}">
-</head>
-<body>
+    <link rel="icon" th:href="@{/image/favicon/favon.png}" />
+  </head>
+  <body>
+    <div id="view_layout">
+      <div id="top_banner">
+        <!-- top banner -->
+      </div>
 
-<div id="view_layout">
+      <div id="central_content">
+        <!-- central content -->
 
-    <div id="top_banner">
-        <!-- top banner --> 
-        
-    </div>
-
-
-    <div id="central_content">
-        <!-- central content --> 
-
-        <input id="menu_id" type="checkbox"/>
-        <label  id="menu_label_id" for="menu_id">
-            Menu
-        </label>
-        <label  id="menu_label_close_id" for="menu_id">
-            Close
-        </label>
+        <input id="menu_id" type="checkbox" />
+        <label id="menu_label_id" for="menu_id"> Menu </label>
+        <label id="menu_label_close_id" for="menu_id"> Close </label>
 
         <div id="left_drawer">
-            <!-- left drawer content  -->
-            <span></span>
-            <span></span>
-            <span></span>
+          <!-- left drawer content  -->
+          <span></span>
+          <span></span>
+          <span></span>
 
-            <div id="left_drawer_content">
+          <div id="left_drawer_content">
+            <div id="price_range_section" class="left_drawer_section">
+              <label for="price_range_cat" id="price_cat_label"
+                >Choose Price Range :</label
+              >
+              <form
+                th:action="@{samples/price_range}"
+                th:object="${ld_filter}"
+                id="price_range_cat"
+                method="post"
+              >
+                <input
+                  class="input number"
+                  type="number"
+                  placeholder="Enter min price [50 tk]"
+                  minlength="2"
+                  maxlength="6"
+                  min="50"
+                  max="999999"
+                  th:field="${ld_filter.min_price}"
+                  required
+                />
+                <input type="reset" value="Reset" />
 
-                <div id="price_range_section" class="left_drawer_section">
+                <input
+                  class="input number"
+                  type="number"
+                  placeholder="Enter max price [9,99,999 tk]"
+                  minlength="2"
+                  maxlength="6"
+                  min="100"
+                  max="999999"
+                  th:field="${ld_filter.max_price}"
+                  required
+                />
+                <input type="reset" value="Reset" />
 
-                    <label for="price_range_cat" id="price_cat_label">Choose Price Range :</label>
-                    <form  th:action="@{samples/price_range}" th:object="${ld_filter}" id="price_range_cat" method="post">
-                        <input class="input number"
-                               type="number"
-                               placeholder="Enter min price [50 tk]"
-                               minlength="2"
-                               maxlength="6"
-                               min="50" max="999999"
-                               th:field="${ld_filter.min_price}"
-                               required/>
-                        <input type="reset" value="Reset">
-
-                        <input class="input number"
-                               type="number"
-                               placeholder="Enter max price [9,99,999 tk]"
-                               minlength="2"
-                               maxlength="6"
-                               min="100" max="999999"
-                               th:field="${ld_filter.max_price}"
-                               required/>
-                        <input type="reset" value="Reset">
-
-                        <button type="submit"> Apply </button>
-                    </form>
-
-                </div>
-
-                <form  th:action="@{samples/lft}" th:object="${ld_filter}" id="left_filter_form" th:method="post">
-                    <div class="left_drawer_section">
- 
-                        <label for="customer_cat" id="customer_cat_label">Choose Customer Type :</label>
-                        <select name="customer" id="customer_cat" th:field="${ld_filter.ctype}" multiple="multiple">
-                             <option th:value="Men"> Men </option>
-                             <option th:value="Woman"> Women </option>
-                             <option th:value="Children"> Children</option>
-                             <option th:value="All"> All</option>
-                         </select>
- 
-                    </div>
- 
-                    <div class="left_drawer_section">
- 
-                         <label for="season_cat" id="season_cat_label">Choose Season Type :</label>
-                         <select name="season" id="season_cat" th:field="${ld_filter.stype}" multiple="multiple">
-                             <option th:value="Winter"> Winter</option>
-                             <option th:value="Summer"> Summer </option>
-                             <option th:value="All"> All</option>
-                        </select>
- 
-                    </div>
-                    
-                    <div class="left_drawer_section">
- 
-                        <label for="discount_cat" id="discount_cat_label">Choose Discount Amount :</label>
-                        <select name="discount" id="discount_cat" th:field="${ld_filter.discount}" multiple="multiple">
-                            <option th:value="5"> 5% </option>
-                            <option th:value="10"> 10% </option>
-                            <option th:value="25"> 25% </option>
-                        </select>
- 
-                     </div>
- 
-                     <input class="mochila_btn" type="submit" value="Apply Filters (Left Side)" />
-                </form>
-
+                <button type="submit">Apply</button>
+              </form>
             </div>
 
-        </div>
+            <form
+              th:action="@{samples/lft}"
+              th:object="${ld_filter}"
+              id="left_filter_form"
+              th:method="post"
+            >
+              <div class="left_drawer_section">
+                <label for="customer_cat" id="customer_cat_label"
+                  >Choose Customer Type :</label
+                >
+                <select
+                  name="customer"
+                  id="customer_cat"
+                  th:field="${ld_filter.ctype}"
+                  multiple="multiple"
+                >
+                  <option th:value="Men">Men</option>
+                  <option th:value="Woman">Women</option>
+                  <option th:value="Children">Children</option>
+                  <option th:value="All">All</option>
+                </select>
+              </div>
 
+              <div class="left_drawer_section">
+                <label for="season_cat" id="season_cat_label"
+                  >Choose Season Type :</label
+                >
+                <select
+                  name="season"
+                  id="season_cat"
+                  th:field="${ld_filter.stype}"
+                  multiple="multiple"
+                >
+                  <option th:value="Winter">Winter</option>
+                  <option th:value="Summer">Summer</option>
+                  <option th:value="All">All</option>
+                </select>
+              </div>
+
+              <div class="left_drawer_section">
+                <label for="discount_cat" id="discount_cat_label"
+                  >Choose Discount Amount :</label
+                >
+                <select
+                  name="discount"
+                  id="discount_cat"
+                  th:field="${ld_filter.discount}"
+                  multiple="multiple"
+                >
+                  <option th:value="5">5%</option>
+                  <option th:value="10">10%</option>
+                  <option th:value="25">25%</option>
+                </select>
+              </div>
+
+              <input
+                class="mochila_btn"
+                type="submit"
+                value="Apply Filters (Left Side)"
+              />
+            </form>
+          </div>
+        </div>
 
         <div id="middle_panel">
-            <!-- middle panel content  --> 
+          <!-- middle panel content  -->
 
-            <div id="nav_top">
-                <!-- top navigation content  --> 
+          <div id="nav_top">
+            <!-- top navigation content  -->
 
-                <nav>
-                    <ul>
-                        <li>
-                            <div>
-                                <h1 class="neon blue" data-text="in the Name of Allah">in the Name of Allah</h1>
-                        
-                                <span class="box">  </span>
-                                <span class="bar">  </span>
-                        
-                            </div>
-                        </li>
+            <nav>
+              <ul>
+                <li>
+                  <div>
+                    <h1 class="neon blue" data-text="in the Name of Allah">
+                      in the Name of Allah
+                    </h1>
 
-                        <li>
-                            <div>
-                        
-                            </div>
-                        </li>
+                    <span class="box"> </span>
+                    <span class="bar"> </span>
+                  </div>
+                </li>
 
-                        <li>
-                            <div>
-                                <h1 class="neon blue" data-text="in the Name of Allah">in the Name of Allah</h1>
-                        
-                                <span class="box">  </span>
-                                <span class="bar">  </span>
-                        
-                            </div>
-                        </li>
+                <li>
+                  <div></div>
+                </li>
 
-                        <!-- other components  as list oder,
+                <li>
+                  <div>
+                    <h1 class="neon blue" data-text="in the Name of Allah">
+                      in the Name of Allah
+                    </h1>
+
+                    <span class="box"> </span>
+                    <span class="bar"> </span>
+                  </div>
+                </li>
+
+                <!-- other components  as list oder,
                            path should be given as required-->
-                    </ul>
-                </nav>
+              </ul>
+            </nav>
+          </div>
+
+          <div id="main_view">
+            <!-- main view content  -->
+
+            <div id="tab">
+              <span>Signed In As User: </span>
+              <span th:text="${session.user}"></span>
             </div>
 
-
-            <div id="main_view">
-                <!-- main view content  --> 
-
-                <div id="tab">
-                    <span th:text="${session.ice}"></span>
-                </div>
-
-                <div id="content_container" th:insert="~{ ${navfp} :: ${navf} }" >
-
-                </div>
-
-
-            </div>
-
-
-            <div id="nav_bottom">
-                 <!-- bottom navigation content  --> 
-
-                <nav>
-                    <ul>
-                        <li>
-                            <div>
-                                  <span class="liquid bothwayX"></span>
-
-                                  <form th:action="@{search}" th:object="${search_filter}" method="post">
-                                      
-                                      <input class="input raw"
-                                             type="text"
-                                             th:field="${search_filter.data}"
-                                             placeholder="Type Here (min 2 char--max 20 char)"
-                                             minlength="2"
-                                             maxlength="20" required/>
-                                             
-                                      <button class="search_btn" type="submit"> Search </button>
-                                  
-                                  </form>
-                            </div>
-                        </li>
-
-                        <li>
-
-                             <form th:action="@{trending}" method="post">
-
-                                <button type="submit" th:autofocus=${nav_bar.focus[1]}> Trending 
-                                     <span class="liquid bothwayX"></span>
-                               </button>
-
-                             </form>
-
-                        </li>
-
-                        <li>
-
-                            <form th:action="@{about}" method="post">
-
-                                <button type="submit" th:autofocus=${nav_bar.focus[2]} > About 
-                                     <span class="liquid bothwayX"></span>
-                                </button>
-
-                            </form>
-
-                        </li>
-
-                        <li>
-
-                            <form th:action="@{contact}" method="post">
-
-                                <button type="submit" th:autofocus=${nav_bar.focus[3]}> Contact 
-                                   <span class="liquid bothwayX"></span>
-                                </button>
-
-                            </form>
-
-                        </li>
-
-                        <li>
-
-                            <form th:action="@{samples}" method="post">
-
-                               <button type="submit" th:autofocus=${nav_bar.focus[4]}> Samples
-                                   <span class="liquid bothwayX"></span>
-                               </button>
-
-                            </form>
-
-                        </li>
-
-                        <li>
-                          
-                           <form th:action="@{wishlist}" method="post">
-
-                               <button type="submit" th:autofocus=${nav_bar.focus[5]}> Wish-list 
-                                   <span class="liquid bothwayX"></span>
-                               </button>
-
-                            </form>
-
-                        </li>
-
-                        <li>
-
-                           <form th:action="@{account}" method="post">
-
-                                <button type="submit" th:autofocus=${nav_bar.focus[6]}> Account
-                                     <span class="liquid bothwayX"></span>    
-                                </button>
-
-                           </form>
-
-                        </li>
-
-                        <li>
-
-                            <div class="drop_up">
-                                <button class="more_options"> More</button>
-
-                                <div class="more_content">
-
-                                    <div>
-    
-                                        <form th:action="@{trending}" method="post">
-
-                                            <button type="submit" th:autofocus=${nav_bar.focus[1]}> Trending 
-                                                 <span class="liquid bothwayY"></span>
-                                           </button>
-            
-                                        </form>
-                                        
-                                    </div>
-
-                                    <div>
-
-                                        <form th:action="@{about}" method="post">
-
-                                            <button type="submit" th:autofocus=${nav_bar.focus[2]} > About 
-                                                 <span class="liquid bothwayY"></span>
-                                            </button>
-            
-                                        </form>
-                                        
-                                    </div>
-
-                                    <div>
-
-                                        <form th:action="@{contact}" method="post">
-
-                                            <button type="submit" th:autofocus=${nav_bar.focus[3]}> Contact 
-                                               <span class="liquid bothwayY"></span>
-                                            </button>
-            
-                                        </form>
-
-                                    </div>
-
-                                    <div>
-
-                                        <form th:action="@{samples}" method="post">
-
-                                            <button type="submit" th:autofocus=${nav_bar.focus[4]}> Samples
-                                                <span class="liquid bothwayY"></span>
-                                            </button>
-             
-                                         </form>
-
-                                    </div>
-
-                                    <div>
-
-                                        <form th:action="@{wishlist}" method="post">
-
-                                            <button type="submit" th:autofocus=${nav_bar.focus[5]}> Wish-list 
-                                                <span class="liquid bothwayY"></span>
-                                            </button>
-             
-                                         </form>
-
-                                    </div>
-
-                                    <div>
-
-                                        <form th:action="@{account}" method="post">
-
-                                            <button type="submit" th:autofocus=${nav_bar.focus[6]}> Account
-                                                 <span class="liquid bothwayY"></span>    
-                                            </button>
-            
-                                        </form>
-
-                                    </div>
-
-                                </div>
-                                
-                            </div> 
-
-                        </li>
-
-                        <!-- other components  as list oder,
+            <div
+              id="content_container"
+              th:insert="~{ ${navfp} :: ${navf} }"
+            ></div>
+          </div>
+
+          <div id="nav_bottom">
+            <!-- bottom navigation content  -->
+
+            <nav>
+              <ul>
+                <li>
+                  <div>
+                    <span class="liquid bothwayX"></span>
+
+                    <form
+                      th:action="@{search}"
+                      th:object="${search_filter}"
+                      method="post"
+                    >
+                      <input
+                        class="input raw"
+                        type="text"
+                        th:field="${search_filter.data}"
+                        placeholder="Type Here (min 2 char--max 20 char)"
+                        minlength="2"
+                        maxlength="20"
+                        required
+                      />
+
+                      <button class="search_btn" type="submit">Search</button>
+                    </form>
+                  </div>
+                </li>
+
+                <li>
+                  <form th:action="@{trending}" method="post">
+                    <button type="submit" th:autofocus="${nav_bar.focus[1]}">
+                      Trending
+                      <span class="liquid bothwayX"></span>
+                    </button>
+                  </form>
+                </li>
+
+                <li>
+                  <form th:action="@{about}" method="post">
+                    <button type="submit" th:autofocus="${nav_bar.focus[2]}">
+                      About
+                      <span class="liquid bothwayX"></span>
+                    </button>
+                  </form>
+                </li>
+
+                <li>
+                  <form th:action="@{contact}" method="post">
+                    <button type="submit" th:autofocus="${nav_bar.focus[3]}">
+                      Contact
+                      <span class="liquid bothwayX"></span>
+                    </button>
+                  </form>
+                </li>
+
+                <li>
+                  <form th:action="@{samples}" method="post">
+                    <button type="submit" th:autofocus="${nav_bar.focus[4]}">
+                      Samples
+                      <span class="liquid bothwayX"></span>
+                    </button>
+                  </form>
+                </li>
+
+                <li>
+                  <form th:action="@{wishlist}" method="post">
+                    <button type="submit" th:autofocus="${nav_bar.focus[5]}">
+                      Wish-list
+                      <span class="liquid bothwayX"></span>
+                    </button>
+                  </form>
+                </li>
+
+                <li>
+                  <form th:action="@{account}" method="post">
+                    <button type="submit" th:autofocus="${nav_bar.focus[6]}">
+                      Account
+                      <span class="liquid bothwayX"></span>
+                    </button>
+                  </form>
+                </li>
+
+                <li>
+                  <div class="drop_up">
+                    <button class="more_options">More</button>
+
+                    <div class="more_content">
+                      <div>
+                        <form th:action="@{trending}" method="post">
+                          <button
+                            type="submit"
+                            th:autofocus="${nav_bar.focus[1]}"
+                          >
+                            Trending
+                            <span class="liquid bothwayY"></span>
+                          </button>
+                        </form>
+                      </div>
+
+                      <div>
+                        <form th:action="@{about}" method="post">
+                          <button
+                            type="submit"
+                            th:autofocus="${nav_bar.focus[2]}"
+                          >
+                            About
+                            <span class="liquid bothwayY"></span>
+                          </button>
+                        </form>
+                      </div>
+
+                      <div>
+                        <form th:action="@{contact}" method="post">
+                          <button
+                            type="submit"
+                            th:autofocus="${nav_bar.focus[3]}"
+                          >
+                            Contact
+                            <span class="liquid bothwayY"></span>
+                          </button>
+                        </form>
+                      </div>
+
+                      <div>
+                        <form th:action="@{samples}" method="post">
+                          <button
+                            type="submit"
+                            th:autofocus="${nav_bar.focus[4]}"
+                          >
+                            Samples
+                            <span class="liquid bothwayY"></span>
+                          </button>
+                        </form>
+                      </div>
+
+                      <div>
+                        <form th:action="@{wishlist}" method="post">
+                          <button
+                            type="submit"
+                            th:autofocus="${nav_bar.focus[5]}"
+                          >
+                            Wish-list
+                            <span class="liquid bothwayY"></span>
+                          </button>
+                        </form>
+                      </div>
+
+                      <div>
+                        <form th:action="@{account}" method="post">
+                          <button
+                            type="submit"
+                            th:autofocus="${nav_bar.focus[6]}"
+                          >
+                            Account
+                            <span class="liquid bothwayY"></span>
+                          </button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <!-- other components  as list oder,
                            path should be given as required-->
-                    </ul>
-                </nav>
-            </div>
-
-
+              </ul>
+            </nav>
+          </div>
         </div>
-
 
         <div id="right_drawer">
-            <!-- right drawer content  -->
-            <span></span>
-            <span></span>
-            <span></span>
+          <!-- right drawer content  -->
+          <span></span>
+          <span></span>
+          <span></span>
 
-        
-            <div id="right_drawer_content" th:object="${rd_filter}">
+          <div id="right_drawer_content" th:object="${rd_filter}">
+            <form
+              th:action="@{samples/rft}"
+              id="right_filter_form"
+              method="post"
+            >
+              <div class="right_drawer_section">
+                <label for="cloth_cat" id="cloth_cat_label"
+                  >Choose Cloth Type :</label
+                >
+                <select
+                  name="cloth"
+                  id="cloth_cat"
+                  th:field="${rd_filter.cltype}"
+                  multiple="multiple"
+                >
+                  <option th:value="FullShirt">Full-Shirt</option>
+                  <option th:value="HalfShirt">Half-Shirt</option>
+                  <option th:value="TShirt">T-Shirt</option>
+                  <option th:value="FullPant">Full-Pant</option>
+                  <option th:value="Trouser">Trouser</option>
+                  <option th:value="Underwear">Under-wear</option>
+                </select>
+              </div>
 
-                <form  th:action="@{samples/rft}" id="right_filter_form" method="post">
-                     
-                    <div class="right_drawer_section">
+              <div class="right_drawer_section">
+                <label for="color_cat" id="color_cat_label"
+                  >Choose Color Type :</label
+                >
+                <select
+                  name="color"
+                  id="color_cat"
+                  th:field="${rd_filter.color}"
+                  multiple="multiple"
+                >
+                  <option th:value="White">White</option>
+                  <option th:value="Black">Black</option>
+                  <option th:value="Purple">Purple/Violate</option>
+                  <option th:value="DeepBlue">Deep Blue</option>
+                  <option th:value="SkyBlue">Sky-Blue</option>
+                  <option th:value="Green">Green</option>
+                  <option th:value="Yellow">Yellow</option>
+                  <option th:value="Orange">Sky-Blue</option>
+                  <option th:value="Red">Green</option>
+                </select>
+              </div>
 
-                        <label for="cloth_cat" id="cloth_cat_label">Choose Cloth Type :</label>
-                        <select name="cloth" id="cloth_cat" th:field="${rd_filter.cltype}" multiple="multiple">
-                            <option th:value="FullShirt"> Full-Shirt </option>
-                            <option th:value="HalfShirt"> Half-Shirt </option>
-                            <option th:value="TShirt"> T-Shirt </option>
-                            <option th:value="FullPant"> Full-Pant </option>
-                            <option th:value="Trouser"> Trouser</option>
-                            <option th:value="Underwear"> Under-wear</option>
-                       </select>
-
-                    </div>
-
-                    <div class="right_drawer_section">
-
-                        <label for="color_cat" id="color_cat_label">Choose Color Type :</label>
-                        <select name="color" id="color_cat" th:field="${rd_filter.color}" multiple="multiple">
-                            <option th:value="White"> White </option>
-                            <option th:value="Black"> Black </option>
-                            <option th:value="Purple"> Purple/Violate </option>
-                            <option th:value="DeepBlue"> Deep Blue </option>
-                            <option th:value="SkyBlue"> Sky-Blue</option>
-                            <option th:value="Green"> Green </option>
-                            <option th:value="Yellow"> Yellow</option>
-                            <option th:value="Orange"> Sky-Blue</option>
-                            <option th:value="Red"> Green </option>
-                        </select>
-
-                    </div>
-
-                   <input class="mochila_btn" type="submit" value="Apply Filters (Right Side)" />
-               </form>
-
-            </div>
-
+              <input
+                class="mochila_btn"
+                type="submit"
+                value="Apply Filters (Right Side)"
+              />
+            </form>
+          </div>
         </div>
+      </div>
 
-
+      <div id="bottom_banner">
+        <!-- bottom banner  -->
+      </div>
     </div>
-
-
-    <div id="bottom_banner">
-            <!-- bottom banner  --> 
-    </div>
-
-</div>
-
-</body>
+  </body>
 </html>
