@@ -1,4 +1,4 @@
-package org.reservior.secure_ui.controller;
+package org.reservior.secure_ui.controller.test;
 
 
 import org.reservior.secure_ui.model.PersonForm;
@@ -27,10 +27,12 @@ public class SampleViewController {
         System.out.println(personForm.toString());
         if (bindingResult.hasErrors()) {
             System.out.println("inside"+bindingResult.toString());
-            return "webapp/sample/index";
+            //return "webapp/sample/index";
+            return "sample/index";
         }
-        return "sample/results";
+
         //return "webapp/sample/results";
+        return "sample/results";
     }
 
 //    @RequestMapping("vom")
@@ -38,6 +40,16 @@ public class SampleViewController {
         SampleTableInfo info = new SampleTableInfo();
         model.addAttribute("list1",info.getList1());
         model.addAttribute("list2",info.getList2());
+        //return "webapp/sample/table";
         return "sample/table";
     }
+
+    @RequestMapping("tableview")
+    public String show_table(Model model) {
+        SampleTableInfo info = new SampleTableInfo();
+        model.addAttribute("list4",info.getList4());
+        //return "webapp/sample/table_board";
+        return "sample/table_board";
+    }
+    
 }

@@ -1,4 +1,4 @@
-package org.reservior.secure_ui;
+package org.reservior.secure_ui.filter;
 
 
 import java.io.IOException;
@@ -10,23 +10,21 @@ import javax.servlet.http.*;
 
 @WebFilter
 public class SecureUiFilter implements Filter {
-    private int ice_bar = 1;
-    private int ice = 0;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
                                                 throws IOException, ServletException {
 
-        System.out.println("pre-filter beggins");
+//        System.out.println("pre-filter beggins");
 
         HttpServletRequest hsrequest = (HttpServletRequest) request;
         HttpServletResponse hsresponse = (HttpServletResponse) response;
         HttpSession session = hsrequest.getSession(false);
 
-        System.out.println("Remote Host:"+hsrequest.getRemoteHost());
-        System.out.println("Remote Address:"+hsrequest.getRemoteAddr());
-        System.out.println("Requested Path:"+hsrequest.getRequestURI());
-        System.out.println("Requested URL:"+hsrequest.getRequestURL());
+//        System.out.println("Remote Host:"+hsrequest.getRemoteHost());
+//        System.out.println("Remote Address:"+hsrequest.getRemoteAddr());
+//        System.out.println("Requested Path:"+hsrequest.getRequestURI());
+//        System.out.println("Requested URL:"+hsrequest.getRequestURL());
 
         String secure_url = "";
 
@@ -46,9 +44,17 @@ public class SecureUiFilter implements Filter {
                 secure_url = data;
             }
 
-            System.out.println("Redirected URL:"+secure_url);
+//            System.out.println("Redirected URL:"+secure_url);
             hsresponse.sendRedirect(secure_url);
             return;
+        }
+
+
+        for (String s:FilterRestrictedSites.get_restricted_page_list()){
+            if (hsrequest.getRequestURL().toString().contains(s)){
+                System.out.println("Found it as restriction");
+                //hsresponse.sendRedirect("/account");
+            }
         }
 
         hsresponse.setHeader("cache-control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
@@ -56,26 +62,10 @@ public class SecureUiFilter implements Filter {
         hsresponse.setDateHeader("expires", 0); // Proxies.
 
         if(session!=null){
-            if(session.getAttribute("ice")==null){
-                session.setAttribute("ice",0);
-            }
-            ice = (int) session.getAttribute("ice");
-            System.out.println("ice_bar: "+ice_bar+" ^^^ ice:"+ice);
-
-            if(!hsrequest.getRequestURI().contains(".")){
-                if(ice==ice_bar) {
-                    System.out.println("ice = icebar");
-
-                }
-                else {
-                    System.out.println("ice not = icebar");
-                    ice_bar = ice;
-                }
-            }
-
+            System.out.println("Active session");
         }
         else {
-            System.out.println("null session");
+            System.out.println("Null session");
         }
 
         if(hsrequest.getCookies()!=null){
@@ -84,9 +74,9 @@ public class SecureUiFilter implements Filter {
             }
         }
 
-        System.out.println("pre-filter ends  \n" +" filter begins");
+//        System.out.println("pre-filter ends  \n" +" filter begins");
         chain.doFilter(request, response);
-        System.out.println("filter ends  \n  *****  \n \n");
+//        System.out.println("filter ends  \n  *****  \n \n");
     }
 
     public Cookie eliminate_cookies(Cookie cookie) {

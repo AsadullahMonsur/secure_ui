@@ -9,6 +9,7 @@ public class SampleTableInfo {
     private List<TableData> listp = new ArrayList<TableData>();
     private List<TableData> listq = new ArrayList<TableData>();
     private List<TableData> list3 = new ArrayList<TableData>();
+    private List<TableData> list4 = new ArrayList<TableData>();
 
     public SampleTableInfo() {
         List<String> data = new ArrayList<String>();
@@ -214,6 +215,123 @@ public class SampleTableInfo {
         list3.add(td13);
         list3.add(td14);
         list3.add(td15);
+
+
+        List<String> data17 = new ArrayList<String>();
+        data17.add("ID");
+        data17.add("#001");
+        data17.add("#009");
+        data17.add("#915");
+        data17.add("#054");
+        data17.add("#017");
+        data17.add("#077");
+        data17.add("#085");
+        data17.add("#0041");
+        data17.add("#019");
+        data17.add("#916");
+        data17.add("#055");
+        data17.add("#013");
+        data17.add("#071");
+        data17.add("#082");
+
+        List<String> data18 = new ArrayList<String>();
+        data18.add("Name");
+        data18.add("ab");
+        data18.add("apm");
+        data18.add("cluv");
+        data18.add("bdz");
+        data18.add("fgn");
+        data18.add("hkp");
+        data18.add("qrv");
+        data18.add("ab");
+        data18.add("apm");
+        data18.add("cluv");
+        data18.add("bdz");
+        data18.add("fgn");
+        data18.add("hkp");
+        data18.add("qrv");
+
+        List<String> data19 = new ArrayList<String>();
+        data19.add("Price");
+        data19.add("100");
+        data19.add("150");
+        data19.add("100");
+        data19.add("250");
+        data19.add("250");
+        data19.add("300");
+        data19.add("200");
+        data19.add("100");
+        data19.add("150");
+        data19.add("100");
+        data19.add("250");
+        data19.add("250");
+        data19.add("300");
+        data19.add("200");
+
+        List<String> data20 = new ArrayList<String>();
+        data20.add("Color");
+        data20.add("white");
+        data20.add("black");
+        data20.add("mixed");
+        data20.add("black");
+        data20.add("blue");
+        data20.add("pink");
+        data20.add("yellow");
+        data20.add("white");
+        data20.add("black");
+        data20.add("mixed");
+        data20.add("black");
+        data20.add("blue");
+        data20.add("pink");
+        data20.add("yellow");
+
+        List<String> data21 = new ArrayList<String>();
+        data21.add("Size");
+        data21.add("XL");
+        data21.add("L");
+        data21.add("XL");
+        data21.add("XL");
+        data21.add("XXL");
+        data21.add("XL");
+        data21.add("L");
+        data21.add("XL");
+        data21.add("L");
+        data21.add("XL");
+        data21.add("XL");
+        data21.add("XXL");
+        data21.add("XL");
+        data21.add("L");
+
+        List<String> data22 = new ArrayList<String>();
+        data22.add("Date");
+        data22.add("12-10-2024");
+        data22.add("12-10-2023");
+        data22.add("11-07-2023");
+        data22.add("10-05-2021");
+        data22.add("05-01-2015");
+        data22.add("25-08-2024");
+        data22.add("23-06-2024");
+        data22.add("12-10-2024");
+        data22.add("12-10-2023");
+        data22.add("11-07-2023");
+        data22.add("10-05-2021");
+        data22.add("05-01-2015");
+        data22.add("25-08-2024");
+        data22.add("23-06-2024");
+
+        TableData td17 = new TableData(data17);
+        TableData td18 = new TableData(data18);
+        TableData td19 = new TableData(data19);
+        TableData td20 = new TableData(data20);
+        TableData td21 = new TableData(data21);
+        TableData td22 = new TableData(data22);
+
+        list4.add(td17);
+        list4.add(td18);
+        list4.add(td19);
+        list4.add(td20);
+        list4.add(td21);
+        list4.add(td22);
     }
 
     public List<TableData> getList2() {
@@ -234,6 +352,14 @@ public class SampleTableInfo {
 
     public List<TableData> getList3() {
         return list3;
+    }
+
+    public List<TableData> getList4() {
+        return list4;
+    }
+
+    public void setList4(List<TableData> list4) {
+        this.list4 = list4;
     }
 
     public List<TableData> delete_list3_data(int index){
@@ -325,5 +451,38 @@ public class SampleTableInfo {
         getList3().get(getList3().size()-2).getElements().add(sum+"");
 
         return  getList3();
+    }
+
+    public static List<TableData> get_mock_filter_list() {
+        List<TableData> mock_list = new ArrayList<TableData>();
+
+        List<String> data1 = new ArrayList<String>();
+        data1.add("ID");
+        List<String> data2 = new ArrayList<String>();
+        data2.add("Name");
+        List<String> data3 = new ArrayList<String>();
+        data3.add("Price");
+        List<String> data4 = new ArrayList<String>();
+        data4.add("Color");
+        List<String> data5 = new ArrayList<String>();
+        data5.add("Size");
+        List<String> data6 = new ArrayList<String>();
+        data6.add("Date");
+
+        TableData td1 = new TableData(data1);
+        TableData td2 = new TableData(data2);
+        TableData td3 = new TableData(data3);
+        TableData td4 = new TableData(data4);
+        TableData td5 = new TableData(data5);
+        TableData td6 = new TableData(data6);
+
+        mock_list.add(td1);
+        mock_list.add(td2);
+        mock_list.add(td3);
+        mock_list.add(td4);
+        mock_list.add(td5);
+        mock_list.add(td6);
+
+        return mock_list;
     }
 }
