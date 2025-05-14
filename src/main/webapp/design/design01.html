@@ -1,0 +1,864 @@
+<html xmlns:th="http://www.thymeleaf.org"><head>
+    <meta lang="en" charset="UTF-8"
+          name="viewport" content="width=device-width, initial-scale=1,  minimum-scale=1,maximum-scale=3, user-scalable=yes">
+
+    <meta http-equiv="cache-control" content="max-age=0, no-cache, no-store, must-revalidate, private">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+
+    <title>UI Hut</title>
+<!--
+    <link rel="stylesheet"
+          href="../static/css/equinox_view_design.css"
+          th:href="@{/css/equinox_view_design.css}"/> -->
+
+    <link rel="icon" th:href="@{/image/favicon/orange.png}">
+
+    <style>
+        /*in the Name of Allah*/
+  html,body {
+    margin: 0;
+    padding: 0;
+    --banner-flag: 100px;
+    --max-height:100vh;
+    --max-width: 100vw;
+    --middle-panel-background:rgba(52, 54, 77, 0);
+    --drawer-topnav-background:rgba(5, 5, 15, 0.705);
+    --drawer-topnav-background-hover:rgb(6, 6, 104);
+    --drawer-topnav-text-color:rgb(240, 240, 240);
+
+    --notification-panel-background:white;
+    --notification-panel-width:312px;
+    --notification-panel-height:128px;
+    --notification-panel-header-background: black;
+    --notification-panel-content-background:rgb(116, 116, 116);
+
+    --icon-wide: 96px;
+  }
+  /*auto indent clt+shit+i*/
+  /*this is the root holder*/
+  #view_layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  background: url('design01_image03.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  }
+
+  #middle_panel{
+  min-width: 0px;
+  visibility: inherit;
+  display: inherit;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-self: center;
+  background: var(--middle-panel-background);
+  }
+
+  #left_drawer{
+  position:relative;
+  min-width: 288px;
+  max-width: 288px;
+  max-height: var(--max-height);
+  visibility: inherit;
+  display: inherit;
+  flex-direction: column;
+  flex-grow: 1;
+  background: var(--drawer-topnav-background);
+  transition: 1.5s;
+  overflow: hidden;
+  }
+
+  #left_drawer{
+  justify-self: flex-start;
+  }
+
+  #menu_id{
+  margin:auto;
+  min-height: 96px;
+  min-width: 96px;
+  max-height: 96px;
+  max-width: 96px;
+  position:absolute;
+  visibility: hidden;
+  z-index: 5;
+  }
+
+  #menu_id:not(:checked) ~  #left_drawer{
+  min-width: 0px;
+  max-width: 0px;
+  }
+
+  #menu_label_id{
+  margin:auto;
+  min-height: 96px;
+  min-width: 96px;
+  max-height: 96px;
+  max-width: 96px;
+  position:absolute;
+  display: flex;
+  flex-direction: row;
+  background:transparent;
+  cursor: pointer;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  }
+
+  #menu_id:checked ~ #menu_label_id{
+  visibility: hidden;
+  }
+
+  #menu_id:not(:checked) ~  #menu_label_id{
+  visibility: visible;
+  color: rgb(24, 223, 24);
+  }
+
+  #menu_label_close_id{
+  margin:auto;
+  min-height: 96px;
+  min-width: 96px;
+  max-height: 96px;
+  max-width: 96px;
+  position:absolute;
+  display: flex;
+  flex-direction: row;
+  background:transparent;
+  cursor: pointer;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  }
+
+  #menu_id:checked ~ #menu_label_close_id{
+  visibility: visible;
+  color: rgb(243, 24, 24);
+  }
+
+  #menu_id:not(:checked) ~  #menu_label_close_id{
+  visibility: hidden;
+  }
+
+  #nav_top{
+  min-height: 96px;
+  max-height: 96px;
+  visibility: inherit;
+  display: inherit;
+  flex-direction: row;
+  flex-grow: 1;
+  background-color: rgba(197, 38, 189, 0);
+  transition: 1.5s;
+  }
+
+  #nav_top nav{
+  min-height: inherit;
+  max-height: inherit;
+  visibility: inherit;
+  display: none;
+  flex-direction: inherit;
+  flex-grow: 1;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--drawer-topnav-background);
+  }
+
+  #nav_top nav ul {
+  min-height: inherit;
+  max-height: inherit;
+  padding: 0;
+  margin: 0;
+  visibility: inherit;
+  display: inherit;
+  flex-direction: row;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  list-style-type: none;
+  background-color: transparent;
+  }
+
+  #nav_top nav ul li{
+  min-height: inherit;
+  visibility: inherit;
+  display: inherit;
+  flex-direction: inherit;
+  flex-grow: 1;
+  background: transparent;
+  color: var(--drawer-topnav-text-color);
+  align-items: center;
+  justify-content: center;
+  transition: 0.75s;
+  }
+
+  #nav_top nav ul li:nth-child(n+3):hover{
+  background: var(--drawer-topnav-background-hover);
+  }
+
+  #nav_top nav ul li:nth-child(1){
+  min-width: 96px;
+  max-width: 96px;
+  background: transparent;
+  }
+
+  #nav_top nav ul li:nth-child(2){
+  max-width: 256px;
+  background: white;
+  color: black;
+  }
+
+  .drop_down {
+    min-width:100%;
+    min-height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .drop_down:hover .more_options {
+    background: white;
+    color: #030e27;
+  }
+
+  .more_options {
+    min-width:100%;
+    min-height: 100%;
+    background: transparent;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    border: none;
+  }
+
+  .more_content {
+    min-width: 224px;
+    top: 96px;
+    right: 0px;
+    display: none;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 7;
+  }
+
+
+  .more_content div{
+    min-width: 100%;
+    min-height: 48px;
+    max-height: 48px;
+    display: none;
+  }
+
+  .more_content div form{
+    min-width: 100%;
+    min-height: inherit;
+    max-height: inherit;
+    display: inherit;
+  }
+
+  .more_content div button {
+    min-width: 100%;
+    min-height: 48px;
+    max-height: 48px;
+    position: relative;
+    color: #010611;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.89);
+    transition: 1.25s;
+  }
+
+  .more_content div button:hover {
+    background: rgba(162, 164, 165, 0.774);
+  }
+
+  .more_content div button:hover  .bothwayY{
+    top: 0;
+    bottom: 0;
+    background: #09ff00;
+    transition: 1s;
+  }
+
+  .more_content div button:focus {
+    background: rgba(37, 37, 39, 0.918);
+    color: white;
+    font-weight: bold;
+  }
+
+  .more_content div button:focus  .bothwayY{
+    top: 0;
+    bottom: 0;
+    background: #09ff00;
+    transition: 1s;
+  }
+
+  .more_content div button:active {
+    background: rgba(37, 37, 39, 0.918);
+  }
+
+  .drop_down:hover .more_content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .liquid{
+    position: absolute;
+    transition: 2s;
+   }
+
+  .bothwayY{
+    min-width: 4px;
+    top: 50%;
+    bottom: 50%;
+    left: 0;
+    background: rgb(43, 201, 3);
+  }
+
+  #notification_panel_helper{
+    position: absolute;
+    min-width: 36px;
+    min-height: 36px;
+    display: flex;
+    flex-direction: row;
+    background: green;
+    z-index: 8;
+    right: 20;
+    top:100px;
+  }
+
+  #notification_panel_helper:not(:checked){
+    display: flex;
+    visibility: collapse;
+    opacity: 0;
+    transform: translate(0px, 20px);
+    transition: 1s;
+  }
+
+  #notification_panel_helper:checked{
+  display: flex;
+  transform: translate(0px, -20px);
+  transition: 1s;
+  }
+
+  #notification_panel_helper:not(:checked) ~ #notification_panel{
+    display: flex;
+    visibility: collapse;
+    opacity: 0;
+    transform: translate(0px, 20px);
+    transition: 1s;
+  }
+
+  #notification_panel_helper:checked ~ #notification_panel{
+  display: flex;
+  transform: translate(0px, -20px);
+  transition: 1s;
+  }
+
+  #notification_panel{
+    position: absolute;
+    min-width: var(--notification-panel-width);
+    max-width: 312px;
+    min-height: var(--notification-panel-height);
+    display: flex;
+    flex-direction: column;
+    background: var(--notification-panel-background);
+    z-index: 8;
+    right: 20;
+    top:140px;
+    box-shadow: 5px 5px 15px 5px rgba(19, 19, 19, 0.514);
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  #notification_panel_header{
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  background: var(--notification-panel-header-background);
+  }
+
+  #notification_panel_content{
+  padding: 7px;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 4;
+  background: var(--notification-panel-content-background);
+  }
+
+  #notification_panel_title{
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: flex-start;
+  }
+
+  #notification_panel_title::after{
+  padding-left: 7px;
+  content: 'Notification';
+  color: white;
+  }
+
+  @media screen and (min-height: 500px) {
+  #view_layout {
+    min-height: 100vh;
+  }
+  }
+
+  @media screen and (min-height: 700px) {
+  #view_layout {
+    min-height: 100vh;
+  }
+  }
+
+  @media screen and (min-height: 1024px) {
+  #view_layout {
+    min-height: 100vh;
+  }
+
+  }
+
+  @media screen and (min-height: 1280px) {
+  #view_layout {
+    min-height: 100vh;
+  }
+
+  }
+
+  @media screen and (max-width: 500px) {
+    #nav_top nav{
+    display: inherit;
+  }
+
+  #nav_top nav ul li:nth-child(3){
+      display: none;
+  }
+
+  #nav_top nav ul li:nth-child(4){
+      display: none;
+  }
+
+  #nav_top nav ul li:nth-child(5){
+      display: none;
+  }
+
+  .more_content div{
+      display: inherit;
+  }
+
+  .more_content div:nth-child(1){
+      display: inherit;
+  }
+
+  .more_content div:nth-child(2){
+      display: inherit;
+  }
+
+  .more_content div:nth-child(3){
+      display: inherit;
+  }
+  }
+
+  @media screen and (min-width: 500px) {
+  #left_drawer{
+    max-width: 288px;
+  }
+
+  #menu_id:checked ~ #middle_panel{
+    --drawer-width: 288px;
+  }
+
+  #nav_top nav{
+    display: inherit;
+  }
+
+  #nav_top nav ul li:nth-child(3){
+      display: none;
+  }
+
+  #nav_top nav ul li:nth-child(4){
+      display: none;
+  }
+
+  #nav_top nav ul li:nth-child(5){
+      display: none;
+  }
+
+  .more_content div:nth-child(1){
+      display: inherit;
+  }
+
+  .more_content div:nth-child(2){
+      display: inherit;
+  }
+
+  .more_content div:nth-child(3){
+      display: inherit;
+  }
+
+  }
+
+  @media screen and (min-width: 700px) {
+  #left_drawer{
+    max-width: 288px;
+  }
+
+  #menu_id:checked ~ #middle_panel{
+    --drawer-width: 288px;
+  }
+
+  #nav_top nav{
+    display: inherit;
+  }
+
+  #nav_top nav ul li:nth-child(3){
+      display: inherit;
+  }
+
+  #nav_top nav ul li:nth-child(4){
+      display: none;
+  }
+
+  #nav_top nav ul li:nth-child(5){
+      display: none;
+  }
+
+  .more_content div:nth-child(1){
+      display: none;
+  }
+
+  .more_content div:nth-child(2){
+      display: inherit;
+  }
+
+  .more_content div:nth-child(3){
+      display: inherit;
+  }
+
+  }
+
+  @media screen and (min-width: 1024px) {
+  #left_drawer{
+    max-width: 312px;
+  }
+
+  #menu_id:checked ~ #middle_panel{
+    --drawer-width: 312px;
+
+  }
+
+  #nav_top nav{
+    display: inherit;
+  }
+
+  #nav_top nav ul li:nth-child(3){
+      display: inherit;
+  }
+
+  #nav_top nav ul li:nth-child(4){
+      display: inherit;
+  }
+
+  #nav_top nav ul li:nth-child(5){
+      display: none;
+  }
+
+  .more_content div:nth-child(1){
+      display: none;
+  }
+
+  .more_content div:nth-child(2){
+      display: none;
+  }
+
+  .more_content div:nth-child(3){
+      display: inherit;
+  }
+
+  }
+
+  @media screen and (min-width: 1280px) {
+  #left_drawer{
+    max-width: 312px;
+  }
+
+  #menu_id:checked ~ #middle_panel{
+    --drawer-width: 312px;
+
+  }
+
+  #nav_top nav{
+    display: inherit;
+  }
+
+  #nav_top nav ul li:nth-child(3){
+      display: inherit;
+  }
+
+  #nav_top nav ul li:nth-child(4){
+      display: inherit;
+  }
+
+  #nav_top nav ul li:nth-child(5){
+      display: inherit;
+  }
+
+  .more_content div:nth-child(1){
+      display: none;
+  }
+
+  .more_content div:nth-child(2){
+      display: none;
+  }
+
+  .more_content div:nth-child(3){
+      display: none;
+  }
+
+  }
+
+
+  .svg_viewer{
+      min-height: var(--icon-wide);
+      min-width: var(--icon-wide);
+      max-height: var(--icon-wide);
+      max-width: var(--icon-wide);
+      display: flex;
+      flex: 1;
+      flex-grow:1;
+      flex-direction: row;
+      overflow:hidden;
+      transform: rotate(0deg);
+      z-index: 2;
+      align-items: center;
+      justify-content: center;
+      background: var(--bgcb);
+  }
+
+  #site_logo_svg_container{
+      outline: 2px solid rgb(27, 25, 25);
+      width: 64vmin;
+      height:64vmin;
+      cursor: pointer;
+      display: block;
+      transition: 1s ease-in-out;
+  }
+
+  #site_logo_svg_container:hover{
+      transform: rotate(135deg);
+      filter: drop-shadow(3px 5px 2px rgba(17, 16, 16, 0.623));
+  }
+
+  #circle{
+      fill: rgba(172, 143, 90, 0.87);
+  }
+
+  #circle:hover{
+      filter: drop-shadow(0 0 1px rgb(0, 226, 0));
+  }
+
+  path{
+      stroke: rgb(4, 13, 46);
+      stroke-width: .15px;
+      transition: d 0.75s;
+  }
+
+  #site_logo_svg_container:hover > #stick0deg {
+      d: path("M7,5 l2,0");
+  }
+
+  #site_logo_svg_container:hover > #stick45deg {
+      d: path("M6.4,3.6 l1.41,-1.41");
+  }
+
+  #site_logo_svg_container:hover > #stick90deg {
+      d: path("M5,3 l0,-2");
+  }
+
+  #site_logo_svg_container:hover > #stick135deg {
+      d: path("M3.6,3.6 l-1.41,-1.41");
+  }
+
+  #site_logo_svg_container:hover > #stick180deg {
+      d: path("M3,5 l-2,0");
+  }
+
+  #site_logo_svg_container:hover > #stick225deg {
+      d: path("M3.6,6.4 l-1.41,1.41");
+  }
+
+  #site_logo_svg_container:hover > #stick270deg {
+      d: path("M5,7 l0,2");
+  }
+
+  #site_logo_svg_container:hover > #stick315deg {
+      d: path("M6.4,6.4 l1.41,1.41");
+  }
+    </style>
+
+</head>
+<body>
+
+<div id="view_layout" th:style="'background: url(' + ${layout_background} + '); background-size:cover; background-repeat:no-repeat;'">
+
+    <input id="menu_id" type="checkbox">
+    <label id="menu_label_id" for="menu_id">
+        Menu
+    </label>
+
+    <label id="menu_label_close_id" for="menu_id">
+        Close
+    </label>
+
+    <div id="left_drawer">
+        <!-- left drawer content  -->
+
+        <div id="left_drawer_content">
+
+
+        </div>
+
+    </div>
+
+
+    <div id="middle_panel">
+        <!-- middle panel content  -->
+
+        <div id="nav_top">
+            <!-- top navigation content  -->
+
+            <nav>
+                <ul>
+                    <li>
+                        <!-- reserved space for menu  -->
+                    </li>
+
+                    <li>
+                        <div class="svg_viewer">
+                            <svg id="site_logo_svg_container" viewBox="0 0 10 10">
+
+                                <path id="stick0deg"   d="M7,5 l0,0" />
+                                <path id="stick45deg"  d="M6.4,3.6 l0,0" />
+                                <path id="stick90deg"  d="M5,3 l0,0" />
+                                <path id="stick135deg" d="M3.6,3.6 l0,0" />
+                                <path id="stick180deg" d="M3,5 l0,0" />
+                                <path id="stick225deg" d="M3.6,6.4 l0,0" />
+                                <path id="stick270deg" d="M5,7 l0,0" />
+                                <path id="stick315deg" d="M6.4,6.4 l0,0" />
+
+                                <circle id="circle" cx="5" cy="5" r=".75"/>
+
+                            </svg>
+
+                        </div>
+                    </li>
+
+                    <li>
+                        Home
+                    </li>
+
+                    <li>
+                        Docs
+                    </li>
+
+                    <li>
+                        Prices
+                    </li>
+
+                    <li>
+
+                        <div class="drop_down">
+                            <button class="more_options"> More</button>
+
+                            <div class="more_content">
+
+                                <div>
+
+                                    <form th:action="@{a}" method="post">
+
+                                        <button type="submit"> Home
+                                            <span class="liquid bothwayY"></span>
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+                                <div>
+
+                                    <form th:action="@{b}" method="post">
+
+                                        <button type="submit"> Docs
+                                            <span class="liquid bothwayY"></span>
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+                                <div>
+
+                                    <form th:action="@{c}" method="post">
+
+                                        <button type="submit"> Prices
+                                            <span class="liquid bothwayY"></span>
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </li>
+
+                    <!-- other components  as list oder,
+                     path should be given as required-->
+                </ul>
+            </nav>
+        </div>
+
+        <div id="main_view">
+            <!-- main view content  -->
+
+            <div id="tab">
+                <span></span>
+            </div>
+
+        </div>
+    </div>
+
+    <input id="notification_panel_helper" type="checkbox" checked/>
+
+    <div id="notification_panel">
+
+        <div id="notification_panel_header">
+        <span id="notification_panel_title">
+          <span id="notification_panel_title_point">
+
+          </span>
+        </span>
+
+        </div>
+
+        <div id="notification_panel_content">
+            Peace Befalls Upon You, welcome to coffee charm!
+            detain a seat, slam opponents face, smash furnitures and so on!
+        </div>
+
+    </div>
+</div>
+
+</body>
+
+</html>
