@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta lang="en"
+          charset="UTF-8"
+          name="viewport"
+          content="width=device-width, initial-scale=1,  minimum-scale=1,maximum-scale=3, user-scalable=yes"/>
+
+    <meta http-equiv="cache-control" content="max-age=0, no-cache, no-store, must-revalidate, private">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="0">
+
+    <title>Secure UI</title>
+    <link rel="icon" th:href="@{/image/favicon/favon.png}">
+
+    <style>
+        html,body {
+            margin: 0;
+            padding: 0;
+
+            --table2_view-background:rgba(212, 212, 183, 0.137);
+            --table2_row-odd-background:#3d3d3f;
+            --table2_row-even-background:#3d3d3f;
+            --table2_row-bottom-border-color:#676769;
+            --table2_row-hover:rgba(38, 87, 179, 0.842);
+            --table2_row-hover-left-border-color:rgb(215, 238, 8);
+            --table2_row-hover-right-border-color:rgb(252, 9, 82);
+            --table2_row-clear-item-background:rgb(49, 51, 51);
+            --table2_row-clear-item-font-color:red;
+            --table2_row-header-font-color: rgb(37, 201, 5);
+            --table2_row-content-font-color: rgb(255, 255, 255);
+        }
+
+        #view_layout{
+            min-height: 100vh;
+            display: flex;
+            flex-grow: 1;
+            flex-direction: column;
+            background: rgb(211, 210, 203);
+        }
+
+        .table2_view{
+            margin:75px;
+            max-width: 80%;
+            display: flex;
+            flex-direction: row;
+            align-self:center;
+            background: var(--table2_view-background);
+            box-shadow: 0 4px 8px 0 rgba(43, 44, 43, 0.514);
+            z-index: 2;
+            overflow: scroll;
+        }
+
+        .table2_view:hover{
+            box-shadow: 8px 8px 16px 8px rgba(33, 34, 34, 0.459);
+        }
+
+
+        .table2_row{
+            min-height: 50px;
+            max-height: 50px;
+            display: flex;
+            flex-direction: row;
+            background: transparent;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--table2_row-bottom-border-color);
+        }
+
+        .table2_row:hover{
+            border-left: 3px solid var(--table2_row-hover-left-border-color);
+            border-right: 3px solid var(--table2_row-hover-right-border-color);
+        }
+
+
+        .table2_column{
+            min-width: 150px;
+            display: flex;
+            flex-direction: column;
+            background: transparent;
+        }
+
+
+        .table2_column .table2_row:nth-child(odd){
+        background: var(--table2_row-odd-background);
+        }
+
+        .table2_column:nth-child(odd) .table2_row:hover{
+            background: var(--table2_row-hover);
+        }
+
+        .table2_column .table2_row:nth-child(even){
+        background: var(--table2_row-even-background);
+        }
+
+        .table2_column:nth-child(even) .table2_row:hover{
+            background: var(--table2_row-hover);
+        }
+
+        .table2_row:nth-child(1){
+           border-bottom: 1px solid var(--table2_row-bottom-border-color);
+        }
+
+        .table2_row:nth-child(1) span{
+            color:var(--table2_row-header-font-color);
+            font-size: 700;
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+            font-stretch: extra-expanded;
+            font-style: italic;
+        }
+
+        .table2_row:nth-of-type(n+2) span{
+            color: var(--table2_row-content-font-color);
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .forms button{
+        min-width:40px;
+        min-height: 24px;
+        color: var(--table2_row-clear-item-font-color);
+        background: var(--table2_row-clear-item-background);
+        border: none;
+        outline: none;
+        }
+
+    </style>
+</head>
+<body>
+<div id="view_layout">
+    <div class="table2_view">
+        <div class="table2_column" th:each="data : ${list4}">
+
+            <div class="table2_row" th:each="item,iterator : ${data.elements}">
+
+                <form action="#"  th:if="${item}!='X'" th:object="${item}" method="post">
+                    <span th:text="${item}"></span>
+                </form>
+
+                <form action="#" th:if="${item}=='X'"
+                      th:action="@{tableview/delete}"
+                      class="forms"
+                      method="post">
+                    <input type="number" th:value="${iterator.index}" name="index" hidden/>
+                    <button type="submit" th:text="${item}"></button>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
